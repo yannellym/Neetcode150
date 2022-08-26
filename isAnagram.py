@@ -1,0 +1,42 @@
+# Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+# An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+ 
+
+# Example 1:
+
+# Input: s = "anagram", t = "nagaram"
+# Output: true
+# Example 2:
+
+# Input: s = "rat", t = "car"
+# Output: false
+ 
+
+# Constraints:
+
+# 1 <= s.length, t.length <= 5 * 104
+# s and t consist of lowercase English letters.
+
+#try
+class Solution(object):
+    def isAnagram(self, s, t):
+        return sorted(s) == sorted(t)
+    
+#try.  O(s + t)
+class Solution(object):
+    def isAnagram(self, s, t):
+    
+        def dicted(l):
+            count = {}
+            for x in l:
+                if x not in count:
+                    count[x] = 0
+                count[x] += 1
+            return count
+
+        return dicted(s) == dicted(t)
+      
+ #optimal solution
+
