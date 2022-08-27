@@ -26,9 +26,9 @@ class Solution(object):
         temp = defaultdict(list)
 
         for string in strs:
-           temp[str(sorted(string))].append(string)
+           temp[''.join(sorted(string))].append(string)
         
-        response = list(temp.values())
-        return response
+        return temp.values()
+        
         
         
