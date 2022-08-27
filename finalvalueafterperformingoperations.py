@@ -40,13 +40,11 @@
   class Solution(object):
     def finalValueAfterOperations(self, operations):
         x = 0
-        result = 0
         
         for string in operations:
             if string == "--X" or string == "X--":
-                m = 0 - 1
+                x -= 1
             else: 
-                m = 0 + 1 
+                x += 1 
             
-            result += m
-        return result
+        return x
