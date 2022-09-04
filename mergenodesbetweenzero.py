@@ -62,18 +62,17 @@ class Solution(object):
                 
 #    
     
-        dummy_head = ListNode(-1)
-        newlist_current = dummy_head
-        current = head
-        
-        while current is not None:
+      list1 = ListNode()
+        list2 = list1
+        current = head.next
+        total = 0
+
+        while current:
+            if current.val == 0:
+                list1.next = ListNode(total)
+                list1 = list1.next
+                total = 0
+            else:
+                total += current.val
             current = current.next
-            counter = 0
-            while current is not None and current.val != 0:
-                counter += current.val
-                current = current.next
-            if counter != 0:
-                newlist_current.next = ListNode(counter)
-                newlist_current = newlist_current.next
-        return dummy_head.next
-        
+        return list2.next
