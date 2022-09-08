@@ -75,18 +75,33 @@ romanToInt("MCMXCIV")
 
 OR ************************
 
-def romanToInt(self, s):
-        data= {
-          "I": 1,
-          "V": 5,
-          "X": 10,
-          "L": 50,
-          "C": 100,
-          "D": 500,
-          "M": 1000
-          }
-        s = s.replace("IV", "IIII").replace("IX", "VIIII")
-        s = s.replace("XL", "XXXX").replace("XC", "LXXXX")
-        s = s.replace("CD", "CCCC").replace("CM", "DCCCC")
-        return sum(map(data.get, s))
-
+class Solution(object):
+    def romanToInt(self, s):
+        
+        store = {
+            "I" : 1,
+            "V" : 5,
+            "X" : 10,
+            "L" : 50,
+            "C" : 100,
+            "D" : 500,
+            "M" : 1000,
+            "IV": 4,
+            "IX": 9,
+            "XL": 40, 
+            "XC": 90,
+            "CD": 400,
+            "CM": 900
+        }
+        
+        int_total = 0
+        i = 0
+        len_s = len(s)
+        while i < len_s:
+            if i < len_s - 1 and s[i:i+2] in store:
+                int_total += store[s[i:i+2]]
+                i += 2
+            else:
+                int_total += store[s[i]] 
+                i += 1
+        return int_total
