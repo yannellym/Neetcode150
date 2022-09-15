@@ -104,22 +104,30 @@
 #     self.left = None
 #     self.right = None
 
+breadth first (iterative)
+from collections import deque
+    
 def tree_levels(root):
   if root is None:
     return []
-  #BFS
-  stack = [ root ]
-  res = []
-  level = 0
   
-  while stack:
-    current = stack.pop(0)
-    if current.right and current.left:
-      res.append([current.val])
+  levels = []
+  queue = deque([ (root, 0) ])
+  while queue:
+    current, level_num = queue.popleft()
     
-    if current.left:
-      stack.append(current.left)
-    if current.right:
-      stack.append(current.right)
-  return res
+    if len(levels) == level_num:
+      levels.append([ current.val ])
+    else:
+      levels[level_num].append(current.val)
       
+    if current.left is not None:
+      queue.append((current.left, level_num + 1))
+      
+    if current.right is not None:
+      queue.append((current.right, level_num + 1))
+  
+  return levels
+n = number of nodes
+Time: O(n)
+Space: O(n)
