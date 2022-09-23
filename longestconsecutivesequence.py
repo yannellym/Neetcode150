@@ -31,6 +31,7 @@
 # -109 <= nums[i] <= 109
 
 
+
 class Solution(object):
     def longestConsecutive(self, nums):
         """
@@ -42,10 +43,10 @@ class Solution(object):
         
         for i in nums:
             length = 0
-            if i-1 not in store:
+            if i - 1 not in nums:
                 length = 1
-                while (i + length) in store:
+                while (i + length) in nums:
                     length += 1
-                longest = max(length, longest)
+                    longest = max(length, longest)
         return longest
             
