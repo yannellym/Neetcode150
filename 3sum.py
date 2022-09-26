@@ -47,23 +47,28 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        res = []
-        nums.sort()
-
-        for i, a in enumerate(nums):
-            if i > 0 and a == nums[i - 1]:
+        res = [] # we will be returning an array of arrays
+        nums.sort() # sort the array for efficiency
+        
+        for index, value in enumerate(nums):
+        # if the index is greater than 0, and the value is the same as the previous one, continue
+            if index > 0 and  value == nums[index - 1]: 
                 continue
-
-            l, r = i + 1, len(nums) - 1
-            while l < r:
-                threeSum = a + nums[l] + nums[r]
-                if threeSum > 0:
-                    r -= 1
-                elif threeSum < 0:
-                    l += 1
+        
+            left = index + 1
+            right = len(nums) - 1
+            while  left < right:
+                threesum = value + nums[left] + nums[right]
+                if threesum < 0:
+                    left += 1
+                elif threesum > 0:
+                    right -= 1
                 else:
-                    res.append([a, nums[l], nums[r]])
-                    l += 1
-                    while nums[l] == nums[l - 1] and l < r:
-                        l += 1
+                    # append this to the response array
+                    res.append([value, nums[left], nums[right]])
+                    left += 1
+                    # make sure it's not the same as previous, and that left is less than right
+                    while nums[left] == nums[left-1] and left < right:
+                        left += 1
         return res
+                
