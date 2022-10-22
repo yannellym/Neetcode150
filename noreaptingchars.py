@@ -11,7 +11,23 @@
 # Output: 2
 # Explanation: The longest substring without any repeating characters is "ab".
 
-  
+ 
+# 1 store()
+# 2 store('a')
+# 3 store('a', 'b')
+# 4 store('a', 'b', 'c')
+  # char in store so keep doing this while its inside store
+  # 5 char = c is in store so remove a -> store('b', 'c')
+  # 6 char = c is in store so remove b -> store('c')
+  # 7 char = c is in store so remove c -> store()
+  # 8 char = c is in store so remove c -> store()
+  # 9 char = c NOT in store so ADD c -> store('c')
+# 10 char = d NOT in store so ADD d -> store('c', 'd')
+# 11 char = e NOT in store so ADD e -> store('c', 'd', 'e')
+
+#both max lenghts were 3 so answer is 3
+
+
   def noRepeatingChars(str):
   max_length = 0
   store = set()
