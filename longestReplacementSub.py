@@ -1,3 +1,6 @@
+# longest sub after k replacements
+#https://www.youtube.com/watch?v=gqXU1UyA8pk&list=PLot-Xpze53leOBgcVsJBEGrHPd_7x_koV&index=4
+
 def longSubRepeatingChars(s, k):
   count = {}
   res = 0
@@ -14,7 +17,7 @@ def longSubRepeatingChars(s, k):
       # take the count of the char at the left position and subtract one
       # we can shift the left pointer(increment it
     
-    while(win_end - win_start + 1) - max(count.values()):
+    while(win_end - win_start + 1) - max(count.values()) > k:
     # choose the max count between res and the window size
       count[s[win_start]] -= 1
       win_start += 1
