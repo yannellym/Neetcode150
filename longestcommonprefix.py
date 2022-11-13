@@ -34,7 +34,6 @@
 # 1,995,416
 # Submissions
 # 4,890,764
-
 class Solution(object):
     def longestCommonPrefix(self, strs):
         """
@@ -45,11 +44,13 @@ class Solution(object):
         origin = strs[0]
         
         for i in range(len(origin)):
+            # will go through each word in strs, flower, flow, flight and check the first char
+             # if they all match, add it to res
+            # then again, check the second char of each word, if they don't match, return the res
             for word in strs:
-              # this will evaluate the left first. Then, the right. 
-              # the left statement is to catch if i goes out of bounds.
                 if i == len(word) or word[i] != origin[i]:
                     return res
             res += origin[i]
         return res
+            
             
