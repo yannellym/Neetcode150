@@ -72,7 +72,9 @@ class Solution(object):
         k = 0
         for i in range(len(nums)):
             if nums[i] != val:
+            # this will replace the num's ith digit with one that is not the val given.
                 nums[k] = nums[i]
                 k += 1
+        # we return K because that's the number of digits that are not equal to the given val.
         return k
     
