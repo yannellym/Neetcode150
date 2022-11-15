@@ -50,7 +50,8 @@ class Solution(object):
             for word in strs:
                 if i == len(word) or word[i] != origin[i]:
                     return res
+            # after it has finished iterating through position 0 in all of the strs' words,
+            # add that char to the res.
             res += origin[i]
         return res
-            
             
