@@ -39,14 +39,29 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        zero = 0
-        one = 0
-        two = 0
-        s = ""
-        for i in range(len(nums)):
-            if(nums[i] == 0): zero +=1
-            elif(nums[i] == 1): one +=1
-            elif(nums[i] == 2): two +=1
-        s = "0"*zero + "1"*one + "2"*two
-        for i in range(len(s)):
-            nums[i] = s[i]
+        left = 0
+        right = len(nums) -1 
+        i = 0
+
+        def swap(index, digit ):
+            tmp = nums[index]
+            nums[index] = nums[digit]
+            nums[digit] = tmp
+
+        # this will make sure to iterate through each num
+        # without repeating it 
+        while i <= right:
+            # if the number at the ith index is 0, swap it with  the num on the left
+            # increase the left
+            if nums[i] == 0:
+                swap(left, i)
+                left += 1
+            # if the number at the ith index is 2, swap it with the num on the right
+            # decrease the right
+            elif nums[i] == 2:
+                swap(i, right)
+                right -= 1
+                # this is so i can cancel out when we increase it in the following line
+                # you dont accidently replace the left numbers with the right ones
+                i -= 1
+            i += 1
