@@ -38,15 +38,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        store = set(nums)
-        longest = 0
-        
-        for i in nums:
-            length = 0
-            if i - 1 not in nums:
-                length = 1
-                while (i + length) in nums:
+        # put them all in a set so you do not have repeated numbers
+        nums2 = set(nums)
+        res = 0
+        # look through each number in your set
+        for i in nums2:
+            # if number  - 1 is not in the set
+            # this means it doesnt have a left neighbor and is the start of a sequence.
+            if i - 1 not in nums2:
+                # set the length to 0
+                length = 0
+                # while the number + length is in our set, increment the length
+                while i + length in nums2:
                     length += 1
-                    longest = max(length, longest)
-        return longest
-            
+                # choose the highest, either res or length
+                res = max(length, res)
+        return res
