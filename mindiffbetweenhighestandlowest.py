@@ -44,13 +44,21 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+      # sort the array first
         nums.sort()
         left = 0
+        # the right is k - 1 because you want the window to be of size k
+        # the arr is 0 index 
         right = k - 1
+        # make this the largest val possible
         res = float('inf')
         
+        # while right is less than the length of nums (our window is valid)
         while right < len(nums):
+            # choose the min between res or the diff of the right and the left
             res = min(res, nums[right] - nums[left])
+            # increase the left and right so the window keeps moving
             left += 1
             right += 1
         return res
+        
