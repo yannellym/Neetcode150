@@ -41,16 +41,21 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        store = set()
-        res = 0
-        left = 0
+        window = set()
         
-        for right in range(len(s)):
-            while s[right] in store:
-                store.remove(s[left])
+        left = 0
+        res = 0
+        # for every character in the string s
+        for r in range(len(s)):
+            # while char at position r is in the window
+            while s[r] in window:
+                # remove the char on the left
+                window.remove(s[left])
+                # update the left index
                 left += 1
-            store.add(s[right])
-            
-            res = max(res, right - left + 1)
+            # add the new char to the window
+            window.add(s[r])
+            # choose the max window size between the res, and the window length
+            res = max(res, r - left + 1)
         return res
                 
