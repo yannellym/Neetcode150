@@ -29,10 +29,22 @@
 # 1 <= nums.length <= 104
 # -231 <= nums[i] <= 231 - 1
 
-left = 0
-        
-        for r in range(len(nums)):
-            if nums[r]:
-                nums[left], nums[r] = nums[r], nums[left]
-                left +=1
-        return nums
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        j = 0
+        i = 0
+        # run through each digit in nums
+        while i < len(nums):
+            # if the digit at index i is greater than 0
+            if nums[i]:
+                # swap digit at index i with digit at index j and viseversa
+                nums[i], nums[j] = nums[j], nums[i]
+                # increase the j so you have the new placement in the array
+                j += 1
+            # increase i so we're not in an infite loop
+            i += 1
+
