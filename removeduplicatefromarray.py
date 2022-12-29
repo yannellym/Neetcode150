@@ -52,17 +52,25 @@
 # 1 <= nums.length <= 3 * 104
 # -100 <= nums[i] <= 100
 # nums is sorted in non-decreasing order.
-
 class Solution(object):
     def removeDuplicates(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        
-        x = 1
-        for i in range(len(nums)-1):
-            if(nums[i] != nums[i+1]):
-                nums[x] = nums[i+1]
-                x+=1
-        return(x)
+        left = 0
+
+        store = set()
+        # go through every element in nums
+        for i in range(len(nums)):
+            # if the element is already in the store, skip it
+            if nums[i] in store:
+                continue
+            # if the element is not in the store,
+            # set nums at index left to be the digit at nums index i
+            # increase the left index, and add the digit at nums index i to the store
+            nums[left] = nums[i]
+            left += 1
+            store.add(nums[i])
+        # return left because it will be the count of original nums
+        return left
