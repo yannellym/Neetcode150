@@ -42,3 +42,28 @@ class Solution:
 # Sorting the list nums of size 2⋅N2 \cdot N2⋅N will take O(2⋅Nlog⁡(2⋅N))O(2 \cdot N \log(2 \cdot N))O(2⋅Nlog(2⋅N)) time which is equivalent to O(Nlog⁡N)O(N \log N)O(NlogN), and iterating over the list will take an additional O(N)O(N)O(N) time. Hence, the time complexity is O(Nlog⁡N)O(N \log N)O(NlogN).
 
 # Space complexity: O(N)O(N)O(N)
+
+class Solution(object):
+    def arrayPairSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+        nums.sort()
+
+        i = 0
+        j = 1
+        store = []
+
+        # while j is less than the length of numbers
+        while j < len(nums):
+            # do a sliding window of 2 elements. Take the min of that window
+            summ = min(nums[i:j+1])
+            # add the min to a list
+            store.append(summ)
+            # increase both pointers to keep the window the same size
+            j+=2
+            i+=2
+        # return the sum of all elements in the list
+        return sum(store)
