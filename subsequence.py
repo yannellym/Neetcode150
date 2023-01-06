@@ -54,4 +54,28 @@ class Solution(object):
         if i == len(s):
             return True
         return False
-            
+       
+       # better solution
+       
+       class Solution(object):
+         def isSubsequence(self, s, t):
+             """
+             :type s: str
+             :type t: str
+             :rtype: bool
+             """
+             if len(s) == 0:
+                 return True
+
+             if len(s) > len(t):
+                 return False
+
+             i = 0
+
+             for char in t:
+                 if char == s[i]:
+                     i+=1
+                 if i == len(s):
+                     return True
+             return False
+
