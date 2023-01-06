@@ -29,22 +29,56 @@
 # Input: s = "paper", t = "title"
 # Output: true
 
-# if one length is greater than the other, return false as the chars cant be replace to make up s
-if len(s) > len(t):
-    return False
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+    
+       # if one length is greater than the other, return false as the chars cant be replace to make up s
+       if len(s) > len(t):
+           return False
+        # create two empty objects
+        sToT = {}
+        tToS = {}
+
+        # for element in s and element in t
+        for x, y in zip(s,t):
+            # if element x is in sTot and the x element doesnt map to y, return false
+            if x in sToT and sToT[x] != y:
+                return False
+            # if element y is in tToS and the y element doesnt map to x, return false
+            if y in tToS and tToS[y] != x:
+                return False
+            # if they haven't been added yet, add them to the objects
+            sToT[x] = y
+            tToS[y] = x
+        # if the "if" statements above fail to execute, that means every letter maps to each other,
+        # we must return true as the strings are isomorphic. 
+        return True
+# better solution 
+
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        if len(s) > len(t):
+            return False
         
         s_store = {}
         t_store = {}
         
         for i in range(len(s)):
-        # add the chars and values to each dict.
             s_store[s[i]] = t[i]
             t_store[t[i]] = s[i]
-        # loop nth amount of times, where nth equals the length of s.   
+            
         for i in range(len(s)):
-            # if the value of the ith char of s_store doesnt equal the value of the ith char in t_store:return false.
-            if s_store[s[i]] != t[i] or t_store[t[i]] != s[i]:
-                return False
-         #if everything else fails, return true
+                if s_store[s[i]] != t[i] or t_store[t[i]] != s[i]:
+                    return False
         return True
         
