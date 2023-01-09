@@ -41,14 +41,23 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        left = 0
-        right = 1
+        # the initial profit will equal zero to begin with
         max_prof = 0
-        while right < len(prices):
-            if prices[left] < prices[right]:
-                profit = prices[right] - prices[left]
-                max_prof = max(max_prof, profit)
+        # set variables to iterate through our prices list
+        i = 0
+        j = 1
+        # while our right pointer is less than the length of prices(within bounds)
+        while j < len(prices):
+            # see if you can make a profit 
+            # if so, set our max_prof variable to this amount
+            if prices[j] > prices[i]:
+                max_prof = max(max_prof,prices[j] - prices[i] )
             else:
-                left = right
-            right += 1
+                # if you can make a profit, left i equal j so you can go right to that day.
+                # you dont have to check other previous numbers as they were already visited
+                i = j
+            
+            # increment j so you can check the next day
+            j += 1
+            
         return max_prof
