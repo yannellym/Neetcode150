@@ -34,21 +34,37 @@
 # 0 <= k <= s.length
 
 
-class Solution:
-	def characterReplacement(self, s: str, k: int) -> int:
-		visited = {}
-		res = 0
-		l = 0
-		freq = 0
+class Solution(object):
+    def characterReplacement(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: int
+        """
+        # set the longest_char variable to equal 0 initially
+        longest_char = 0
+        # win_start will be the start of our window
+        win_start = 0
+        # freq_Store will save the frequences of all our letters in s
+        freq_store = {}
 
-		for r in range(len(s)):
-			visited[s[r]] = 1 + visited.get(s[r], 0)
-			freq = max(freq, visited[s[r]])
+        # loop nth amount of times with n being the length of s
+        for win_end in range(len(s)):
+            # if the current char of s is in the freq_store:
+              # add 1 to its freq, if not, add it to store and then add 1 to freq
+            freq_store[s[win_end]] = 1 + freq_store.get(s[win_end], 0)
+            # save the amount of the maximum frequency values in a variable max_freq
+            max_freq = max(freq_store.values())
 
-			while (r - l + 1) - freq> k:
-				visited[s[l]] -= 1
-				l += 1
+            # while the length of the window - the frequency of the maximum char is less than k:
+             # this means we have way too many replacements.
+            while ((win_end - win_start +1) - max_freq > k):
+                # keep deleting from the freq_store until it is less than the length of the window - the frequency of the maximum char
+                freq_store[s[win_start]] -= 1
+                # update the start of our window since we are subtracting frequencies
+                win_start += 1 
+            # take the longest char to be the max between longest_char and the length of the window
+            longest_char = max(longest_char, win_end - win_start +1)
+        return longest_char
+        
 
-			res = max(res, r - l + 1)
-
-		return res
