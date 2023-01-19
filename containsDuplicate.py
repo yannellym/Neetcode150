@@ -19,3 +19,9 @@
                 return True
             hashset.add(n)
         return False
+      
+  # additional solution
+
+  if len(set(nums)) == len(nums):
+            return False
+        return True
