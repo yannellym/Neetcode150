@@ -56,14 +56,24 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        if head and head.next == None:
-            return False
-        
-        current = head
-        while current:
-            if current.val == None:
+     store = set()
+
+        while head:
+            if head in store:
                 return True
             else:
-                current.val = None
-            current = current.next
+                store.add(head)
+            head = head.next
         return False
+       
+       # alternative
+    
+    
+    
+        while head:
+            if head.val == None:
+                return True
+            head.val = None
+            head = head.next
+        return False
+
