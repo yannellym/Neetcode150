@@ -45,16 +45,33 @@ class Solution(object):
         :type val: int
         :rtype: ListNode
         """
+         # if the head is empty, return an empty list
+        if head == []:
+            return []
+        
+        # previous will equal None, an curr will equal head
         prev = None
-        current = head
-        while current is not None:
-            if current.val == val:
+        curr = head
+
+        # iterate while curr is not none
+        while curr is not None:
+            # if the current nodes' value equals the value given
+            if curr.val == val:
+                # if there is a previous node
                 if prev:
-                    prev.next = current.next
+                    # have the previous node's next point to the current node's next
+                    # this removes the current node
+                    prev.next = curr.next
+                # if there's no previous node
                 else:
-                    head = current.next
-                current = current.next
+                    # have the head point to the current node's next 
+                    head = curr.next
+                # advance the current node to the its next node
+                curr = curr.next
+            # if the current node's val doesnt equal the give val
             else:
-                prev = current
-                current = current.next
+                # have the previous node point ot the current node
+                prev = curr
+                # have the current node point to its next node
+                curr = curr.next
         return head
