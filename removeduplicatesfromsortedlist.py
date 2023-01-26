@@ -36,16 +36,22 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def deleteDuplicates(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        cur = head
-        while cur and cur.next:
-            if cur.val == cur.next.val:
-                cur.next = cur.next.next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr = head
+        # while there is a current and a current's next
+        while curr and curr.next:
+            # check if their values are the same
+            if curr.val == curr.next.val:
+                # if they are the same, make the current's next value equal the
+                # two nodes after itself = curr.next.next
+                curr.next = curr.next.next
             else:
-                cur = cur.next
+                # if they're not equal, just advance to the next node
+                curr = curr.next
+        # this works by comparing the curr node to the next while its the same
+        # if its not the same, just move on to the next node 
         return head
+       
+
+       
