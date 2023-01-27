@@ -44,21 +44,21 @@ Easy
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution(object):
-    def preorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+  res = []
 
-        Q = collections.deque([root] if root else [])
-        res = []
+        Q = [root] if root else []
 
+        # while we have elements in the Q
         while Q:
-            selected = Q.popleft()
-            if selected.right:
-                Q.appendleft(selected.right)
-            if selected.left:
-                Q.appendleft(selected.left)
+            # POP THE LAST ELEMENT
+            selected = Q.pop()
+            # append the value of selected to the res
             res.append(selected.val)
-        return res
+            # append its left and right values to the Q
+            if selected.right:
+                Q.append(selected.right)
+            if selected.left:
+                Q.append(selected.left)
+            
+        # return the reversed list of res
+        return res[::-1]
