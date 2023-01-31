@@ -49,3 +49,13 @@ class Solution(object):
         for i in range(n):
             a, b = b, a + b
         return a
+# alternative
+
+def climbStairs(self, n: int) -> int:
+        a = 1
+        b = 1
+        for _ in range(n-1):
+            tmp = a
+            a = a+b
+            b = tmp
+        return a
