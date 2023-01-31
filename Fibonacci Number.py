@@ -29,8 +29,12 @@
         :type n: int
         :rtype: int
         """
-
-        if n <= 1:
-            return n
+ 
+        if n == 0:
+            return 0
+        # return 1 for 1 and 2
+        if n <=2:
+            return 1
+        # recursively call fib with n-2 and n-1
         else:
-            return self.fib(n - 2) + self.fib(n - 1)
+            return self.fib(n-2) + self.fib(n-1)
