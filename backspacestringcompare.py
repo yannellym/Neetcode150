@@ -58,5 +58,5 @@ class Solution(object):
             # else if there is a store, pop from it
             elif store:
                 store.pop()
-        # return the stack
+        # return the stack with the remaining letters
         return store
