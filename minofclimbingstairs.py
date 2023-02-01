@@ -44,12 +44,13 @@ class Solution(object):
         :type cost: List[int]
         :rtype: int
         """
-        # appends 0 to end of array since the cost at that point would be 0 
+         # appends 0 to end of array since the cost at that point would be 0 
         cost.append(0)
         # start at the third position starting from end of array'
         # iterate backwards
         for i in range(len(cost)-3, -1, -1):
-            # modify cost[i] to equal the min between the one before or two before
-            cost[i] += min(cost[i+1], cost[i+2])
+            print(cost[i])
+            # modify cost[i] to equal the min between cost[i] plus the one before or two before
+            cost[i] = min(cost[i] + cost[i+1], cost[i] + cost[i+2])
         #return the min value of either cost 0 or cost 1
         return min(cost[0], cost[1])
