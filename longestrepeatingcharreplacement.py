@@ -42,7 +42,7 @@ class Solution(object):
         :rtype: int
         """
         # set the longest_char variable to equal 0 initially
-        longest_char = 0
+        longest_char_replace = 0
         # win_start will be the start of our window
         win_start = 0
         # freq_Store will save the frequences of all our letters in s
@@ -63,8 +63,11 @@ class Solution(object):
                 freq_store[s[win_start]] -= 1
                 # update the start of our window since we are subtracting frequencies
                 win_start += 1 
-            # take the longest char to be the max between longest_char and the length of the window
-            longest_char = max(longest_char, win_end - win_start +1)
-        return longest_char
+            # take the longest char to be the max between longest_char_replace
+            # and the length of the window
+            longest_char_replace = max(longest_char_replace, win_end - win_start +1)
+        return longest_char_replace
         
+
+
 
