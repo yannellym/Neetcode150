@@ -53,9 +53,10 @@ class Solution(object):
         # due to this, we have to implement a min heap with negative values
         stones = [-x for x in stones]
         # make the list into a heap
+        # this will arrange values from smallest to largest and always pop the next min element
         heapq.heapify(stones)
 
-        # while the length of stones is greater than 0
+        # while the length of stones is greater than 1
          # this will make sure we can always pop 2 elements
         while len(stones) >1:
             # get the first and second max elements
@@ -69,7 +70,7 @@ class Solution(object):
                 # push the result in the heap
                 heapq.heappush(stones,c)
         # this would take care of the case that the heap doesnt have any elements inside:
-         # insert a 0 to the list
+         # insert a 0 to the list in case we have no elements left in the heap
         stones.append(0)
         # return the absolute values of the first element in the heap(values were negative)
         return abs(stones[0])
