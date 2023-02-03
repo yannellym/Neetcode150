@@ -45,14 +45,23 @@
 
 class Solution(object):
     def twoSum(self, numbers, target):
-        left  = 0
-        right = len(numbers) -1
-        
-        while left < right :
-            cur_sum = numbers[left] + numbers[right]        
-            if cur_sum > target:
-                right -= 1
-            elif cur_sum < target:
-                left += 1
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        j = len(numbers) - 1
+        i = 0
+        # while these are not equal, loop through the digits
+        while i < j:
+            # take the sum, this will equal the diff
+            summ = numbers[i] + numbers[j]
+            # if this sum is larger, decrease j
+            if summ > target:
+                j-=1
+            # if the sum is less, increase i
+            elif summ < target:
+                i+=1
+            # else, we have our indices! return.
             else:
-                return [left + 1 , right + 1]
+                return [i+1, j+1]
