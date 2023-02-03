@@ -40,24 +40,26 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        # Create a resultant list
-        result_list = [0]*len(nums)
-
-        left = 0
-        right = len(nums) - 1
-
-        # iterate the resultant list from the end, 
-        # this is because we want to the final result to be in a rising order
-        for result_pointer in range(len(nums)-1, -1 , -1):
-            if abs(nums[left])>abs(nums[right]):
-                result_list[result_pointer] = nums[left]*nums[left]
-                left += 1
+        # create a result array filled with 0s and the length of nums
+        res = [0] * len(nums)
+        # create out pointers
+        i = 0
+        j = len(nums)-1
+        # for every digit in nums, loop starting at the last digit
+        for digit in range(len(nums)-1,-1,-1):
+            # if the absolute value of the left digit in nums is greater than the right digit in nums
+            # have the current index value of res equal to the left value in nums but squared
+            # increment i to move on to the next num
+            if abs(nums[i]) > abs(nums[j]):
+                res[digit] = nums[i] **2
+                i+=1
             else:
-                result_list[result_pointer] = nums[right]*nums[right]
-                right -=1
-        
-        return result_list
-
+            # if the absolute value of the right digit in nums is greater than the left digit in nums
+            # have the current index value of res equal to the right value in nums but squared
+            # decrement j to move on to the next num
+                res[digit] = nums[j]**2
+                j-=1 
+        return res
       
 
 # alternative solution
