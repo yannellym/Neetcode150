@@ -39,3 +39,8 @@
             if value == 1:
                 return key
   
+  # alternative
+    from collections import Counter
+        c = Counter(nums)
+        res = sorted(c,key = lambda x:c[x])[0]
+        return res
