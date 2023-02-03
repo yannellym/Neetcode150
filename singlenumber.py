@@ -44,3 +44,26 @@
         c = Counter(nums)
         res = sorted(c,key = lambda x:c[x])[0]
         return res
+  # Python's XOR   
+  class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # Time Complexity: o(n)
+        # Space Complexity: o(1)
+        # """
+        # Variable to store the solution
+        single_number_solution = 0
+
+        # Loop to traverse all the numbers
+        for value in nums:
+            # this will go through each value and if it hasnt seen the value before,
+            # it will add it to the single_number_solution var
+            # if it has seen it, it will subtract it from single_number_solution var
+            # at the end, we will have the single value in the var
+            single_number_solution ^= value
+
+        # Return the single number solution
+        return single_number_solution
