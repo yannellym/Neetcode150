@@ -35,16 +35,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
+        # keeps tracks of our nums array order
         j = 0
-        i = 0
-        # run through each digit in nums
-        while i < len(nums):
-            # if the digit at index i is greater than 0
+        # for every index in nums
+        for i in range(len(nums)):
+            # if the number is not a 0 
             if nums[i]:
-                # swap digit at index i with digit at index j and viseversa
-                nums[i], nums[j] = nums[j], nums[i]
-                # increase the j so you have the new placement in the array
-                j += 1
-            # increase i so we're not in an infite loop
-            i += 1
+                # swap them
+                nums[j], nums[i] = nums[i], nums[j]
+                # increment j
+                j +=1
+        
 
+#https://www.youtube.com/watch?v=aayNRwUN3Do&t=1s
