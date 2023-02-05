@@ -24,16 +24,13 @@
 # s does not contain any leading or trailing spaces.
 # There is at least one word in s.
 # All the words in s are separated by a single space.
+class Solution:
+    def reverseWords(self, s: str) -> str:
 
-class Solution(object):
-    def reverseWords(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        splitted = s.split(" ")
-        res = ""
-        for word in splitted:
-            res += word[::-1] + " "
-        return res.strip()
-    
+        s = s.split()
+        res = []
+
+        for word in s:
+            res.append(word[::-1])
+
+        return " ".join(res)
