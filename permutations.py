@@ -34,43 +34,41 @@
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        if len(s1) > len(s2):
-            return False
-        
-        lookup1 = [ord(i) - ord('a') for i in s1]
-        lookup2 = [ord(i) - ord('a') for i in s2]
-        # the ASCII values of the letters
-        '''
-        lookup1 = [0,1]
-        lookup2 = [4,8,3,1,0,14,14,14]
-        '''
-        
-        # set up the arrays of 26
+        # gives you the position of the letter
+        # where each letter represents a = 0 to z=26
+        lookup1 = [ord(x) - ord("a") for x in s1]
+        lookup2 = [ord(y) - ord("a") for y in s2]
+
+        # create two arrays of 26 0s to position the letters we will be looking at
+
+        # will hold our letters from s1 and their corresponding positions
         target = [0] * 26
+        # will serve as the window to hold the current letters from s2
         window = [0] * 26
-        
-        # look up each char in lookup1 and increase that char(index) in target array
-        for freq in lookup1:
-            target[freq] += 1
-        # this is what we will compare our operations to, our target
-        '''target = [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]'''
-        
-        # enumerate lookup2
-        # [(0, 4), (1, 8), (2, 3), (3, 1), (4, 0), (5, 14), (6, 14), (7, 14)]
-        for i, freq in enumerate(lookup2):
-            # add it to the current window 
-            window[freq] += 1
-            #if the window size (i) is exceeded
-            if i >= len(s1):
-                # remainder is the number you have left on the left when you move the window to the right.
-                remaining = i - len(s1)
-                # check the value of that char in lookup2 and then subtract it from the current window.
+
+        # go through each index(digit) in lookup1, add to the target array how often it appears
+        for index in lookup1:
+            target[index] +=1
+
+        # loop through lookup2, by looking at its index, and value
+        for index, value in enumerate(lookup2):
+            # add 1 to the window's value 
+            window[value] += 1
+            # if the current index is greater than or equal to the length of s1:
+            if index >= len(s1):
+                # create a remaining variable by subtracting the length of s1 from 1
+                # this will let you know the position of the character you need to subtract from in the window
+                remaining = index - len(s1)
+                # look for the letter in lookup2 by its index
+                # look up the letter in the window with the letter from above, 
+                # subtract 1
                 window[lookup2[remaining]] -=1
-            # if they are equal, great, return true
+            # if this window equals the target window, return true
             if window == target:
                 return True
-        # if everything above fails, there are no permutations so return false
+        # if the true statement above fails to execute, return false 
         return False
+        
     
     # round 1: 
     '''
