@@ -30,6 +30,27 @@
 # nums.length == 2n
 # 1 <= nums[i] <= 10^3
 
+import math 
+
+class Solution(object):
+    def shuffle(self, nums, n):
+        """
+        :type nums: List[int]
+        :type n: int
+        :rtype: List[int]
+        """
+        mid = int(math.ceil(len(nums)/2))
+
+        left = nums[:mid]
+        right = nums[mid:]
+        res = []
+        for i in range(len(left)):
+            res.append(left[i])
+            res.append(right[i])
+        return res
+       
+       
+ # alternative
 class Solution(object):
     def shuffle(self, nums, n):
         """
