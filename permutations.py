@@ -31,63 +31,33 @@
 # s1 and s2 consist of lowercase English letters.
 
 
+class Solution(object):
 
-class Solution:
-    def checkInclusion(self, s1: str, s2: str) -> bool:
-        # gives you the position of the letter
-        # where each letter represents a = 0 to z=26
-        lookup1 = [ord(x) - ord("a") for x in s1]
-        lookup2 = [ord(y) - ord("a") for y in s2]
+    def checkInclusion(self, s1, s2):
+        # check if the length of s1 is greater, if so, return False.
+        # if s1 is longer, it definitly doesnt exit in s2
+        if len(s1) > len(s2):
+            return False
 
-        # create two arrays of 26 0s to position the letters we will be looking at
+        # create two arrays that will hold the index of our inserted values
+        # * 26 for the amount of letters in the alphabet
+        s1lookup = [0] * 26
+        s2lookup = [0] * 26
+        # will keep track of our leftmost index
+        j = 0
+        # add chars to the lookups until the length of s1
+        for i in range(len(s1)):
+            s1lookup[ord(s1[i]) - ord('a')] += 1
+            s2lookup[ord(s2[i]) - ord('a')] += 1
 
-        # will hold our letters from s1 and their corresponding positions
-        target = [0] * 26
-        # will serve as the window to hold the current letters from s2
-        window = [0] * 26
-
-        # go through each index(digit) in lookup1, add to the target array how often it appears
-        for index in lookup1:
-            target[index] +=1
-
-        # loop through lookup2, by looking at its index, and value
-        for index, value in enumerate(lookup2):
-            # add 1 to the window's value 
-            window[value] += 1
-            # if the current index is greater than or equal to the length of s1:
-            if index >= len(s1):
-                # create a remaining variable by subtracting the length of s1 from 1
-                # this will let you know the position of the character you need to subtract from in the window
-                remaining = index - len(s1)
-                # look for the letter in lookup2 by its index
-                # look up the letter in the window with the letter from above, 
-                # subtract 1
-                window[lookup2[remaining]] -=1
-            # if this window equals the target window, return true
-            if window == target:
+        # loop through the remaining characters
+        for i in range(len(s1), len(s2)):
+            if s1lookup == s2lookup:
                 return True
-        # if the true statement above fails to execute, return false 
-        return False
-        
-    
-    # round 1: 
-    '''
-    remaining = 0
-    lookup2[remaining] = 4
-    [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    '''
-     # round 2: 
-    '''
-    remaining = 1
-    lookup2[remaining] = 8
-    [0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    '''
-     # round 3: 
-    '''
-    remaining = 2
-    lookup2[remaining] = 3
-    [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    '''
-        
-    
-        
+            # remove the first char
+            s2lookup[ord(s2[j]) - ord("a")] -= 1
+            s2lookup[ord(s2[i]) - ord("a")] += 1
+            # increase the leftmost index
+            j+=1
+        # check again if they are the equal
+        return s1lookup == s2lookup
