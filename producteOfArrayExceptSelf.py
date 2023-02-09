@@ -35,15 +35,23 @@
 
 # Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
   
-  class Solution:
+ class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        dp=[]
-        product=1
-        for i in nums:
-            dp.append(product)
-            product*=i
-        product=1
+        res = [1] * len(nums)
+        # the prefix will be 1 to start with
+        prefix = 1
+        # loop through nums
+        for i in range(len(nums)):
+            # update the index in res to equal the prefix
+            res[i] = prefix
+            # set the prefix to prefix multiplied by nums i 
+            prefix *= nums[i]
+        # postfix will equal one
+        postfix = 1
+        # loop through nums but backwards
         for i in range(len(nums)-1,-1,-1):
-            dp[i]=dp[i]*product
-            product*=nums[i]
-        return dp
+            # the value at index in res will be multiplied by the postfix
+            res[i] *= postfix
+            # the postfix will now be multiplied by nums i 
+            postfix *= nums[i]
+        return res
