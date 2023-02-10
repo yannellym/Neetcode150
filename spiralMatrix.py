@@ -34,18 +34,24 @@ class Solution(object):
         """
         result = []
         while matrix:
+            # TOP
             # pop the first row and append it to the result
             result += matrix.pop(0) # 1
+
+            # RIGHT
             # if there's a matrix, and theres a row:
             if matrix and matrix[0]: # 2 
                 # # for each line in the matrix, append the last digit to the result
                 for line in matrix:
                     result.append(line.pop())
+            # BOTTOM
             # if the're a matrix: 
             if matrix: # 3
                 # reverse the row, pop it, and append it to the result
                 result += matrix.pop()[::-1]
-            # if there is a trix and a row
+           
+            # LEFT
+            # if there is a matrix and a row
             if matrix and matrix[0]: # 4
                 # for each line in the matrix(reversed)
                 for line in matrix[::-1]:
@@ -54,3 +60,4 @@ class Solution(object):
         return result
 
         # https://leetcode.com/problems/spiral-matrix/solutions/3039684/python-solution-explained-step-by-step-with-illustrations/
+       
