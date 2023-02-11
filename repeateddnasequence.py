@@ -48,3 +48,25 @@ class Solution(object):
                 res.add(curr_pat)
             seen.add(curr_pat)
         return list(res)
+       
+       
+       
+       #alternative
+       
+       class Solution(object):
+    def findRepeatedDnaSequences(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        i = 0
+        store = set()
+        res = set()
+
+        for j in range(9,len(s)):
+            if s[i:j+1] in store:
+                res.add(s[i:j+1])
+            else:
+                store.add(s[i:j+1])
+            i+=1
+        return res
