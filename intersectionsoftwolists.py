@@ -88,19 +88,35 @@ Then we just need to check if at some point the two merged lists are pointing to
 We just need to make sure to string headB onto a and vice versa if one (but not both) list ends.
 
 
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         """
         :type head1, head1: ListNode
         :rtype: ListNode
-        """
+        """ 
         a = headA
         b = headB
+        # while both of them are not equal
         while a != b:
+            # if they are equal, they have intersected or a null at the very end
+            # if theres a node A do a.next else have it equal to our headB
             a = headB if not a else a.next
+            # if theres a node b do b.next else have it equal to our headA
             b = headA if not b else b.next
         return a
-            
+
+        #the idea is to :
+        # have the pointers equal their next pointer if they still have a pointer
+        # if not, have it equal the other head so it runs through the other list
+
+        # we will return a pointer once they meet. it can be at a node or at null
+
+        # o(n*m)
             
          
