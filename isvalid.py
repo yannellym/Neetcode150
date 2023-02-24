@@ -42,23 +42,39 @@
 
 
 Python 3.6
-(known limitations)
-1	def isValid(s):
-2	    stack = []
-3	    brackets_mapping = {
-4	        ')': '(',
-5	        '}': '{',
-6	        ']': '[',
-7	    }
-8	        
-9	    for bracket in s:
-10	        if bracket not in brackets_mapping:
-11	            stack.append(bracket)
-12	        elif stack and stack[-1] == brackets_mapping[bracket]:
-13	            stack.pop()
-14	        else:
-15	            return False
-16	        
-17	    return len(stack) == 0
-18	    
-19	isValid("((()(())))")
+
+
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        # a stack to easily pop our values
+        stack = []
+        # keeps track of the closing/opening bracket
+        store = {
+            ")":"(",
+            "}":"{",
+            "]":"["
+        }
+        
+        # for every symbol in s
+        for symbol in s:
+            # if the symbol is not in the store, 
+            # it means we have an opening bracket
+            # we can append the symbol to the stack
+            if symbol not in store:
+                stack.append(symbol)
+            # if there's a stack AND the last item in the stack
+            # is the opening bracket of this symbol
+            elif stack and stack[-1] == store[symbol]:
+                # pop it from the stack as we have a match
+                stack.pop()
+            else:
+                # if theres no stack and the matching bracket 
+                # is not in the store, just return false
+                return False
+        # verify that the length of the stack is 0,
+        # this will mean its empty and we can return true
+        return len(stack) == 0
