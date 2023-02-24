@@ -50,19 +50,35 @@ class Solution(object):
         :type list2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """   
-        dummy_node = ListNode()
-        tail= dummy_node
-        
-        while list1 and list2:
-            if list1.val < list2.val:
-                tail.next = list1
-                list1 = list1.next
+         # create a dummy head
+        dummy_head = ListNode()
+        # have the current pointer point to the dummy head
+        curr = dummy_head
+        # make references for list1 and list 2
+        head1 = list1
+        head2 = list2
+        # while we have list 2 and list2
+        while head1 and head2:
+            # if the value of the node at list1 is less than
+            # the value of the node at list2
+            if head1.val < head2.val:
+                # have the curr.next equal list1 node
+                curr.next = head1
+                # the new list1 reference will be equal to its next
+                head1 = head1.next
             else:
-                tail.next = list2
-                list2 = list2.next
-            tail = tail.next
-        if list1:
-            tail.next = list1
-        if list2:
-            tail.next = list2
-        return dummy_node.next
+                # ehave the curr.next equal list2 node
+                curr.next = head2
+                # the new list2 reference will be equal to its next
+                head2 = head2.next
+            # move the curr to its next
+            curr = curr.next
+        # if we still have a head1, make curr.next the rest of head1
+        if head1:
+            curr.next = head1
+        # if we still have a head2, make curr.next the rest of head2
+        if head2:
+            curr.next = head2
+        # return dummy.next
+        return dummy_head.next
+       
