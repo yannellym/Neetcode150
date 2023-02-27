@@ -63,3 +63,23 @@ class Solution(object):
                 return [index, store[diff]]
             # if the value is not in the store, add it and set the val as its index
             store[value] = index
+
+# Kotlin
+
+ fun twoSum(nums: IntArray, target: Int): IntArray {
+        val diffMap = mutableMapOf<Int, Int>()
+        
+        // iterate through the array with forEachIndexed
+        // this will give you the index, and the digit
+        nums.forEachIndexed { index, int -> 
+            // if the digit is in the diffMap already
+            // return an intArray of the val of int in DiffMap and the current index
+            diffMap[int]?.let { 
+                return intArrayOf(it, index) 
+            }
+            // if its not in diffMap, store target-int in the diffMap with val of index
+            diffMap[target - int] = index   
+        }
+        // if you don't find anything, return an empty int array
+        return intArrayOf()
+    }
