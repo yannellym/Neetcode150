@@ -57,3 +57,7 @@ class Solution(object):
             size -= 1
 
         
+   # ex babad -> 0 - 5
+        #   baba  -> 0 - 4
+        #   abad -> 1 - 4
+        #   bab -> 0 - 3
