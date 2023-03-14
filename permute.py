@@ -39,32 +39,42 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        # as we can see on our last case,
-        # if the length is one, return the original array
+
+        # create an array for our results
+        results = []
+
+        # if the length of the nums is 1, return an array of a copy of that array
         if len(nums) == 1:
             return [nums[:]]
-
-        # go through each index in nums
+        
+        # iterate the length on nums
         for i in range(len(nums)):
-            # pop the first element
+            # pop the first value
             n = nums.pop(0)
-            # recursively call permute func on nums that has been modified
-            # ex, ex1 original = [1,2,3] -> [2,3] -> [3]
+            # call permute on nums and save it on the perms var
             perms = self.permute(nums)
+            # this will end up being 
+            # [3]
+            # [2]
 
+            # at this point it will get called to return like our code above. We return a copy
+            # we then go next to this code below
+
+            # for every perm arr in perms
+            # perms = [[3], [2]]
             for perm in perms:
-                # append the number that was popped from beginning
+                # append the value we popped
+                # perms [[3,1], [2,1]]
                 perm.append(n)
-            # add this new permutation to the result
-            result.extend(perms)
-            # append the n to the nums again
+            
+            # it iwll go again and append the next number we popped
+            # perms = [[3,1,2], [2,1,3]]
+            # add these arrs of perms to results
+            results.extend(perms)
+            # append the n again to the number so we can go again
             nums.append(n)
-        return result
-#example1
-#         [//1,2,3]        pop 1
-#     [2,3]. [1,3] [1,2].  pop 2
-# [3] [2]  [3] [1]. [2] [1]. we cant go any further so 
-# add 3 to our perm, add 2 since we popped it, add 1 since we popped it.
+        return results
+
 
 
 # https://www.youtube.com/watch?v=s7AvT7cGdSo
