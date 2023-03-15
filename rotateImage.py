@@ -45,3 +45,50 @@
         for i in range(n):
             # fill the matrix with the current matrix section but reversed.
             matrix[i] = matrix[i][::-1]
+           
+     # alternative 
+     
+             l = 0
+        r = len(matrix) - 1
+
+        # while the pointers don't meet
+        while l < r:
+            # iterate through entire row, except last element
+            for i in range(r-l):
+                # since the shape is a sqaure
+                top = l
+                bottom = r
+
+                # save the top left
+                # the i is included to the pointers can move alog with the iterations
+                topLeft = matrix[top][l+i]
+
+                # move bottom left into top left
+                # bottom - i so we can move the pointer left as we use it
+                matrix[top][l+i] = matrix[bottom-i][l]
+
+                # move bottom right to bottom left
+                matrix[bottom-i][l] = matrix[bottom][r-i]
+
+                # move top right into bottom right
+                matrix[bottom][r-i] = matrix[top+i][r]
+
+                # move top left into top right
+                matrix[top + i][r] = topLeft
+            # update the pointers
+            r -= 1
+            l += 1
+        
+
+
+# https://www.youtube.com/watch?v=fMSJSS7eO1w&ab_channel=NeetCode
+
+
+# 1. set the pointers of l =0 and r = len(matrix)-1
+# 2. iterate while l < r
+# 3. iterate row-1 times so you dont touch the last one in the row
+# 4. since the shape is a square, have top = l and bottom = r
+# 5. save the top left value in a "topLeft" var
+# 6. rotate clockwise: bottom left to left, bottom right to bottom left, top right to bottom r, and TopLeft to top right
+# 7. Decrease r and increase l at the end of the iteration
+
