@@ -49,3 +49,14 @@
             count += (1 if num == candidate else -1)
 
         return candidate
+       
+       
+     # alternative 
+     
+      counts = Counter(nums)
+
+        for k, v in counts.items():
+            if v > len(nums)/2:
+                return k
+     
+     https://leetcode.com/problems/majority-element/description/
