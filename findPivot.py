@@ -61,3 +61,20 @@ class Solution(object):
                 return i
         return -1 
      
+    # alternative 
+    
+    
+ class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        total = sum(nums)
+        count = 0
+        # iterate through nums
+        for ind in range(len(nums)):
+            # add the digit at nums to count
+            count += nums[ind]
+            # if the count equal the total, return the index
+            if count == total:
+                return ind
+            # if. not, subtract the digit of nums from the total
+            total -= nums[ind]
+        return -1
