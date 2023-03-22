@@ -22,3 +22,14 @@
 def topKFrequent(self, nums, k):
         c = Counter(nums)
         return [key for key, val in c.most_common(k)]
+  
+  
+  # better approach
+  
+    # creates a counter of nums
+        n = Counter(nums) 
+        # sorts the counter by the following rules:
+        # for every value, sort it in descending order with values that have the most first
+        n = sorted(n, key = lambda x: -n[x])
+        # return up to k because those are the top k values
+        return n[:k]
