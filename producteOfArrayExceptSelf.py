@@ -55,3 +55,28 @@
             # the postfix will now be multiplied by nums i 
             postfix *= nums[i]
         return res
+       
+       
+      # solution 2
+      # step 1: create res array of -1 values the length of nums
+        # step 2: set a prefix equal to 1. iterate length of nums. 
+            # have res[i] equal the prefix
+            # update the prefix to be equal to prefix times nums[i]
+        # step 3: set a postfix equal to 1. Iterate in reverse the length of nums.
+            # update res[i] to equal res[i] times the postfix
+            # update the postfix to be equal to postfix times nums[i]
+        # step 4: return the product
+
+
+        res = [-1] * len(nums)
+
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix
+            prefix = prefix * nums[i]
+
+        postfix = 1
+        for i in range(len(nums)-1,-1,-1):
+            res[i] = res[i] * postfix
+            postfix = postfix * nums[i]
+        return res
