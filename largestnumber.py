@@ -54,3 +54,6 @@ class Solution:
         largest_num = ''.join(largest_num)
         # if you get an array that is ["0000"] just return 0
         return '0' if largest_num[0] == '0' else largest_num
+       
+       
+       # https://www.educative.io/answers/what-is-functoolscmptokey-in-python
