@@ -58,25 +58,30 @@
 # (23+2+6+4)%12=11 -> seen before, so return true because:
 
 # (23+2+6+4) - (23) = 12 -> 12 % 12 = 0
+class Solution:
+    def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        # initialize the store to 0: -1 
+        # this means that we have a subarray of sum 0 that starts at -1
+        # this will help us take care of the edge case that the first val in the arr is a multiple of k
+        # we need an arr of length 2 at least 
+        store  = {0: -1}
+        summ = 0
 
-class Solution(object):
-    def checkSubarraySum(self, nums, k):
-        # initialize the hash map with index 0 for sum 0
-        hash_map = {0: -1}
-        total = 0
-        # enumerate nums to get the index and the value of each digit
-        for index, value in enumerate(nums):
-            # add each digit to the total
-            total += value
-            # find the remainder of the total by k 
-            remain = total % k
-            # if the remainder has not been added to the hash map yet,
-            if remain not in hash_map:
-                # add it to the hash map and make its value equal to the index
-                hash_map[remain] = index
-            # if the result of current index - the index of the remainer is greater than 1:
-            elif index - hash_map[remain] > 1:
-                # that means we have a subarray of length greater than 1, we can return true
+        # iterate through nums to get the index and the key
+        for i, j in enumerate(nums):
+            # add the key to the sum
+            # this will create another subarray 
+            summ += j
+            # find the remainer
+            remainder = summ % k 
+            # if we dont have this remainder in the store
+            if remainder not in store:
+                # add the remainer and add the index. This index is where the remainder sub ENDS
+                store[remainder] = i  
+                # else if the remainder is in the store, and the result from subtracting the current index minus
+                # the index in the store is greater than 1 (this means our sub is greater than length one)
+            elif i - store[remainder] > 1:
+                # return true because we have found our sub
                 return True
-        # if all fails, return False
+        # if the above doesnt execute, we dont have a continuous subarray sum 
         return False
