@@ -41,31 +41,31 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        changed = False
-        # this makes sure that a number always has a pair
-        # by ignoring the last digit
-        for i in range(len(nums) - 1):
-            # if the current digit is less than or equal to the nest digit
-            # continue because this is the right ordering
+        # set a flag to see if we have any changes left
+        changes_left = True
+        # iterate through every number in nums len(nums) -1 so we can have a pair
+        for i in range(len(nums)-1):
+            # if the num at position i is less than or equal to num i + 1, continue
             if nums[i] <= nums[i+1]:
                 continue
-            # if the variable changed is now True:
-            # we have already changed 1 element and reached our limit
-            # of changes
-            if changed:
+            # if there are no changes left, return false
+            if not changes_left:
                 return False
-            # if the index is 0 or the right number is greater than or
-            # equal to the number on the left:
+            # if i is 0, meaning that theres only two chars in the array ex. [0, 4], change the num at position i to be nums i+1
+            # OR if the number at position i +1 is greater than or equal to nums i - 1, change nums i to be equal to numsi +1  
             if i == 0 or nums[i+1] >= nums[i-1]:
-                # make the middle number equal the right number
                 nums[i] = nums[i+1]
             else:
-                # if not, change the right one equal the middle one
+                # else if nums i +1 is less than or equal to numsi - 1, just change numsi+1 to be equal to numsi
                 nums[i+1] = nums[i]
-            # set the changed variable to true
-            changed = True 
-        # return true if the array is in increasing order
+            # change the flag to equal false
+            changes_left = False
+        # if we made it here, it means we sucessfully have a non decreasing array
         return True
+
+        # basically we look at i, compare i +1 to i-1, if i + 1 is >= to i-1 change i to be i+1
+        # if i +1 is <= to i-1, change i +1 to equal nums1
+        # set the false flag
 
                 
                         
