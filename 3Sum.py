@@ -38,40 +38,42 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        # variable to store the result
-        res = []
-        # sort the original array for the search to be more efficient
+        # sort the input array in order to place duplicates next to each other
         nums.sort()
-
-        # get the index and value of every digit in nums
-        for index, value in enumerate(nums):
-            # if the index is greater than 0 (its not the first value in the array)
-            #  and the digit at this index equals 
-            # the previous digit, just continue. We dont want a duplicate digit.
-            if index > 0 and value == nums[index - 1]:
+        res = []
+        # iterate through nums and get the index and the value
+        for i, n in enumerate(nums):
+            # if i is not the first one in the array, and the current value is equal to the previous value
+            if i > 0 and nums[i] == nums[i-1]:
+                # just continue, we dont want duplicates
                 continue
-            # declare the left and right variables
-            left = index + 1
-            right = len(nums) - 1
-
-            # to make sure we dont go out of bounds
-            while left < right:
-                # keeping our sum with our fixed number and two pointers
-                threesum = value + nums[left] + nums[right]
-
-                if threesum < 0:
-                    left += 1
-                elif threesum > 0:
-                    right -= 1
+            # we have a value so far. Ex, -1
+            # lets initialize l as i +1 in order to search on the right
+            l = i+1
+            # r is initialized as len(nums)-1 to start at the end of the array and keep decreasing as necessary
+            r = len(nums)-1
+            # wile l and r are not equal
+            while l < r :
+                # lets save the three values in an array
+                tnums = [n, nums[l], nums[r]]
+                # get the sum of the three values
+                tsum = sum(tnums)
+                # if the sum is greater, decrease the right to make the sum smaller since the arr is sorted
+                if tsum > 0:
+                    r -= 1
+                # if the sum is less than 0, increase the left to make the sum greater since the arr is sorted
+                elif tsum < 0 :
+                    l += 1
+                # if its not greater nor less, add it to the res arr
                 else:
-                    # if this hits, our sum equals 0. SO we add the array to our res
-                    res.append([value,nums[left],nums[right]])
-                    # update the left pointer and the right one updates automatically
-                    left += 1
-                    # if we have the same fixed value and our left pointer is less than our right pointer:
-                    # increase the left. 
-                    # we need this so our left pointer doesnt cross our right pointer.
-                    while nums[left] == nums[left - 1] and left < right:
-                        left += 1
-                    
+                    res.append(tnums)
+                    # increase the l pointer
+                    l +=1
+                    # there might be some edge cases where the number at index l is still the same, so we need
+                    # to take care of this with a while loop. While nums l equals the previous value, and l < r
+                    # we dont want the left pointer to pass the right pointer.
+                    while nums[l] == nums[l-1] and l <r:
+                        # increase the l
+                        l +=1
         return res
+                    
