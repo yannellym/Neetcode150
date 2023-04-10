@@ -44,18 +44,24 @@ class Solution(object):
         """
     
 
-        left = 0
-        right = len(height) - 1
         res = 0
-        
-        while left < right:
-            #1: find the area which is right - left
-            #2: multiply this by the minimun betwen the left and right values
-            #3: let res be whichever is greater between res or the area of height's arr.
-            res = max(res, (right - left) * min(height[left], height[right]))
-            
-            if height[left] < height[right]:
-                left += 1
+        l = 0
+        r = len(height)-1
+        # iterate through height while l < r
+        while l < r :
+            # we get the area of the container
+            # this would be width * height
+            #              r-l     *  (we want the min height because we dont want the water to spill)
+            area = (r-l) * min(height[l], height[r])
+            # choose the max area thus far
+            res = max(res, area)
+
+            # see which pointer is smaller, and increment it. We want a max area!
+            # if the left pointer is smaller, increment it
+            if height[l] < height[r]:
+                l +=1
             else:
-                right -= 1
+                # if the right pointer is smaller, decrement it.
+                r -=1
+        
         return res
