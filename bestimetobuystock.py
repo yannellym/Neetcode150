@@ -61,3 +61,26 @@ class Solution(object):
             j += 1
             
         return max_prof
+
+       
+       # alternative 
+       
+       class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        i = 0
+        j = 1
+        maxProf = 0
+
+        for j in range(len(prices)) :
+            if prices[j] > prices[i]:
+                maxProf = max(maxProf, prices[j] - prices[i])
+            else:
+                i = j
+            
+         
+      
+        return maxProf
