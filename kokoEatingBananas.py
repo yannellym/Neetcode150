@@ -85,4 +85,17 @@ class Solution(object):
                 l= k + 1
         return res
 
+        # for every pile, coco will try to eat # bananas in k hours.
+        '''
+        Input: piles = [3,6,7,11], h = 8
+        Output: 4
         
+        for hour 1, she eats 3
+        hour 2, eats 4
+        hour 3, eats the remaining 2 from the pile
+        hour 4, eats 4 
+        hour 5, eats the reamining 3 from pile
+        hour 6, eats 4
+        hour 7, eats 4
+        hour 8, eats 3 remaining from pile.
+        '''
