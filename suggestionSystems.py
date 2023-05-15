@@ -62,6 +62,14 @@ class Solution(object):
             # ** products at left
             # l <= r and the curr word in products has a length >= i (not within range)
             # while the product doesnt have an ith char or the ith char dosnt equal c
+            
+             '''
+            len(products[l]) <= i: This condition checks if the length of the string at index l 
+            in the products list is less than or equal to i. Here, i represents the index of the
+            current character being processed in searchWord. This condition ensures that the length 
+            of the string is sufficient to compare characters up to the current index i.
+            '''
+             
             while l <= r and (len(products[l]) <= i or products[l][i] != c):
                 # increase until we have looked at all words or we found a matching prefix
                 l +=1
