@@ -55,19 +55,82 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+
+
+# SLOW AND FAST POINTER APPROACH
 class Solution(object):
     def pairSum(self, head):
         """
         :type head: Optional[ListNode]
         :rtype: int
         """
-    
-        st = []
-        while head:
-            st.append(head.val)
-            head = head.next
-        max_sum = 0
-        for i in range(len(st)/2):
-            max_sum = max(max_sum, st[i] + st[len(st)-1-i])
-        return max_sum
+
+        slow, fast = head, head
+        prev = None
+
+        while fast and fast.next:
+            # move fast to the end of the linked list
+            fast = fast.next.next
+            # store the slow.next in a temp
+            tmp = slow.next
+            # slow.next will now equal prev in order to reverse it.
+            slow.next = prev
+            # move prev to be  the slow pointer so it marks the new prev
+            prev = slow
+            # have the slow pointer now be the temp variable
+            slow = tmp 
+
+        # since our list is always of even length, our fast pointer will
+        # always be out of bounds
+        res = 0
+
+
+        # we run while slow is within bounds
+        while slow:
+         
+            # take the max of res or the sum of prev and slow
+            res = max(res, prev.val + slow.val)
+            # advance prev to the next
+            prev = prev.next
+            # advance slow ot the next.
+            slow = slow.next
+ 
+        return res
+ # ARRAY SOLUTION 
+       
+class Solution(object):
+    def pairSum(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: int
+        """
+
+        values = []
+        res = 0
+
+        curr = head
+
+        while curr:
+            values.append(curr.val)
+            curr = curr.next
+
+        
+        l = 0
+        r = len(values)-1
+
+        while l<=r:
+            val = values[l] + values[r]
+            res = max(res, val)
+            l +=1
+            r -=1
+        return res
+            
+
+
             
