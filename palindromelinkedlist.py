@@ -31,13 +31,30 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        store = ""
-        
-        cur = head
-        
-        while cur:
-            store += str(cur.val)
-            cur = cur.next
-        
-        return store == ''.join(reversed(store))
-        
+        slow = head
+        fast = head
+        prev = None
+
+        # finding the middle and reversing it
+        while fast and fast.next:
+            fast = fast.next.next
+            tmp = slow.next
+            slow.next = prev
+            prev = slow
+            slow = tmp
+
+        # Adjust pointers for odd-length lists
+        if fast:
+            slow = slow.next
+
+        # Compare the reversed first half with the second half
+        while prev and slow:
+            if prev.val != slow.val:
+                return False
+            prev = prev.next
+            slow = slow.next
+
+        return True
+#I have added an adjustment for odd-length lists by moving the slow pointer forward by one position. This ensures that the middle element, which does not need to be checked for palindromes, is skipped.
+
+# With the given input of [1, 0, 1], the corrected code will now correctly output True, indicating that the linked list is a palindrome.
