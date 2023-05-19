@@ -33,6 +33,34 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+
+# fast and slow approach
+class Solution(object):
+    def middleNode(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+
+        slow = head
+        fast = head
+        prev = None
+
+        # you advance fast by two steps until it is out of bounds
+        while fast and fast.next:
+            fast = fast.next.next
+
+            # reverse half of the list 
+            temp = slow.next
+            slow.next = prev
+            prev = slow
+            slow = temp
+
+        # return the last node we stopped on after reversing which will be the middle node
+        return slow
+
+# approach with array
 class Solution(object):
     def middleNode(self, head):
         """
