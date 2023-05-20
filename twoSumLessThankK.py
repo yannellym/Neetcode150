@@ -30,22 +30,41 @@
 # 1 <= nums[i] <= 1000
 # 1 <= k <= 2000
 
-class Solution:
-    def twoSumLessThanK(self, nums: List[int], k: int) -> int:      
-      nums.sort()
-      low_index, high_index = 0, len(nums)-1
-      highest_sum = -1
-      while low_index < high_index:
-        cur_sum = nums[low_index] + nums[high_index]
-        
-        if cur_sum < k:
-          highest_sum = max(cur_sum, highest_sum)
-          low_index += 1
-        else:
-          high_index -= 1
-          
-      return highest_sum
-      
+class Solution(object):
+    def twoSumLessThanK(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        # sort the array
+        nums.sort()
+        # Ex. [1, 8, 23, 24, 33, 34, 54, 75]
+
+        # two pointers at each end
+        l = 0
+        r = len(nums)-1
+        # lets set the max to -1 
+        maxSum = -1
+
+
+        # while the pointers do not meet
+        while l < r:
+            # get the sum of the numbers
+            currSum = nums[l] + nums[r]
+            # if the sum is greater than or equal to k
+            if currSum >= k:
+                # decremenet the right side so we get a smaller sum next time
+                r -= 1
+            else:
+                # else, take the max sum so far, and increment the left to look for a bigger sum.
+                maxSum = max(currSum, maxSum)
+                l +=1
+        # return the maxsum which will either be the maxsum or -1 
+        return maxSum 
+
+
+   
       
       
       
