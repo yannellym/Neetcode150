@@ -80,3 +80,35 @@ class Solution(object):
        # this will create combintations that are the same length as digits.
        # if the string that we're creating ever gets to be the same length as digits, we append it to the res and then return.
        # for every value in store[digits[value]], we call backtrack and increase the digit by one and add the value to the curr str
+       
+       
+        '''
+        i	0
+        curStr	""
+        c	"a"
+
+
+        backtrack [parent=f1]
+        i	1
+        curStr	"a"
+        c	"d"
+
+
+        backtrack [parent=f1]
+        i	2
+        curStr	"ad"
+
+        backtrack [parent=f1]
+        i	2
+        curStr	"ad"
+        Return
+        value	None # here the string equals the same length as digits so it adds it to res and returns
+
+
+        backtrack [parent=f1] # now moves to second value in digits[1]
+        i	1
+        curStr	"a"
+        c	"e"
+
+
+        '''
