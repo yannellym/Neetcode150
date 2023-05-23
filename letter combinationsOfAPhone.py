@@ -75,3 +75,8 @@ class Solution(object):
         res = []
         backtrack(0, "")
         return res
+
+       # the idea is to take each number in digits and backtrack the letters on the rest of the numbers in digits.
+       # this will create combintations that are the same length as digits.
+       # if the string that we're creating ever gets to be the same length as digits, we append it to the res and then return.
+       # for every value in store[digits[value]], we call backtrack and increase the digit by one and add the value to the curr str
