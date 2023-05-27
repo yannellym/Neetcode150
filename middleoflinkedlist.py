@@ -60,16 +60,18 @@ class Solution(object):
         # return the last node we stopped on after reversing which will be the middle node
         return slow
 
-# approach with array
+# no need to reverse. Just the last slow node!
 class Solution(object):
     def middleNode(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
-        store = []
-        while head is not None:
-            store.append(head)
-            head = head.next
-        rest = (len(store) // 2)
-        return store[rest]
+        fast = head
+        slow = head
+
+        while fast and fast.next:
+            fast = fast.next.next
+
+            slow = slow.next
+        return slow
