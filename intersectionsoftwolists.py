@@ -94,6 +94,7 @@ We just need to make sure to string headB onto a and vice versa if one (but not 
 #         self.val = x
 #         self.next = None
 
+# approach is to iterate through all of them and once one runs out, have it equal the head of the other. If they are both on the same nodes, have it return one of those nodes.
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         """
