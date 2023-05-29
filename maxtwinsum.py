@@ -71,37 +71,39 @@ class Solution(object):
         :rtype: int
         """
 
-        slow, fast = head, head
+        # our fast and slow pointers
+        slow = head
+        fast = head
         prev = None
 
+        # find the halfway point of the list
         while fast and fast.next:
-            # move fast to the end of the linked list
             fast = fast.next.next
-            # store the slow.next in a temp
-            tmp = slow.next
-            # slow.next will now equal prev in order to reverse it.
+            #reverse the first half 
+            temp = slow.next
             slow.next = prev
-            # move prev to be  the slow pointer so it marks the new prev
             prev = slow
-            # have the slow pointer now be the temp variable
-            slow = tmp 
+            slow = temp
+        # slow will now be at the head of our second half
+        # prev will now be the head of our reversed first half
 
-        # since our list is always of even length, our fast pointer will
-        # always be out of bounds
-        res = 0
+        # var to get updated 
+        maxCount = 0
 
-
-        # we run while slow is within bounds
+        # while we have slow (the shorter list)
         while slow:
-         
-            # take the max of res or the sum of prev and slow
-            res = max(res, prev.val + slow.val)
-            # advance prev to the next
+            # take the max
+            maxCount = max(maxCount, slow.val + prev.val)
+            # advance the pointers
             prev = prev.next
-            # advance slow ot the next.
             slow = slow.next
- 
-        return res
+        return maxCount
+       
+       
+       
+       
+       
+       
  # ARRAY SOLUTION 
        
 class Solution(object):
