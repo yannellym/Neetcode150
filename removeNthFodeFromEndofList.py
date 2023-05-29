@@ -39,11 +39,50 @@
 # Acceptance Rate
 # 40.6%
 
+#SLOW AND FAST SOLUTION
+
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(0, head)
+
+        slow = dummy
+        fast = dummy
+
+        for i in range(n):
+            fast = fast.next
+        
+        # fast .next ensure we are left at the last node with fast.next being NONE
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+        
+        # fast is now 5 in this example (head = [1,2,3,4,5], n = 2)
+        # slow is 3
+        # remove the node
+        
+        slow.next = slow.next.next
+        
+        return dummy.next
+
+       
+       
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+
 class Solution(object):
     def removeNthFromEnd(self, head, n):
         """
