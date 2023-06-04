@@ -74,3 +74,46 @@ class Solution(object):
 
 # Acceptance Rate
 # 52.2%
+# alternate 
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def partition(self, head, x):
+        """
+        :type head: ListNode
+        :type x: int
+        :rtype: ListNode
+        """
+
+        # create a dummy node for list 1 and list 2
+        list1 = ListNode()
+        list2 = ListNode()
+        # create two nodes that reference list1 and list2 and will move through our list
+        ltail = list1
+        rtail = list2
+
+        # while we have a head value
+        while head:
+            # if the value of the head is less than x
+            if head.val < x:
+                # make the left's tail .next equal to head
+                ltail.next = head
+                # move left'tail to equal left's tail .next
+                ltail = ltail.next
+            else:
+                # make right's tail.next = head
+                rtail.next = head
+                # right tail equals right tails ' .next
+                rtail = rtail.next
+            # move along the head to head.next
+            head = head.next
+        # connect the two lists
+        ltail.next = list2.next
+        # make sure you end list2 by assuring that rtail's .next is None
+        rtail.next = None
+        # return list1.next since list1 is a dummy node
+        return list1.next
