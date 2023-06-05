@@ -76,28 +76,42 @@ class Solution(object):
         return sum
        
 # better solution
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # store to reference the values of the keys
+        store = {
+            'I' : 1,
+            'V' : 5,
+            'X' : 10,
+            'L': 50,
+            'C' : 100,
+            'D' : 500,
+            'M' : 1000,
+        }
 
-values = {
-    "I": 1,
-    "V": 5,
-    "X": 10,
-    "L": 50,
-    "C": 100,
-    "D": 500,
-    "M": 1000,
-}
-
-class Solution:
-    def romanToInt(self, s: str) -> int:
-        total = 0
-        i = 0
-        while i < len(s):
-            # If this is the subtractive case.
-            if i + 1 < len(s) and values[s[i]] < values[s[i + 1]]:
-                total += values[s[i + 1]] - values[s[i]]
-                i += 2
-            # Else this is NOT the subtractive case.
+        count = 0
+        # iterate the length of s
+        for i in range(len(s)):
+            # if we're within bounds while referring to i+1
+            # AND the value of s[i] in the store is less than the value of s[i+1] in the store
+            if i + 1 < len(s) and store[s[i]] < store[s[i+1]]:
+                # subtract from that value from the count as s[i] is less than s[i+1]
+                count -= store[s[i]]
             else:
-                total += values[s[i]]
-                i += 1
-        return total
+                # else, add it
+                count += store[s[i]]
+        return count
+
+        # ex, CMXCVIII
+        '''
+        C < M  COUNT = 100
+        M > X  COUNT  = +1000   = 900
+        X < C  COUNT = -10   = 890
+        C > V  COUNT = + 100 = 990
+        V > I  COUNT = + 5  = 995
+        ....III. COUNT = 998
+        '''
