@@ -80,3 +80,12 @@ class Solution(object):
 
 # firstHalf.next = prev: This line connects the node before the sublist to the first node of the reversed sublist. Initially, firstHalf.next points to the last node of the original sublist. By setting firstHalf.next = prev, the next reference of the node before the sublist is updated to point to the first node of the reversed sublist (prev).
 
+
+
+
+
+# we basically iterate through the list and save curr as the first half . 
+# then we reverse the list
+# then we make the first's half.next.next = equal the curr of the reversed list
+# then make firsthalf's.next = prev
+# return the dummy's next
