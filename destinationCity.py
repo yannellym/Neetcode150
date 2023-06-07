@@ -44,17 +44,19 @@
 # Acceptance Rate
 # 77.5%
 
+class Solution(object):
+    def destCity(self, paths):
+        """
+        :type paths: List[List[str]]
+        :rtype: str
+        """
+        # CREATE A SET FOR ALL the unique cities
+        store = set(path[0] for path in paths)
 
-# answer 2
-  source = set()
-        dest = set()
-        # for subpath in paths
-        for l in paths:
-            # add the first city to source
-            source.add(l[0])
-            # add the second city to the dest 
-            dest.add(l[1])
-
-        print(dest)
-        # subtract the destination by the source and put that in a list to be able to index it. Return the first item
-        return list(dest - source)[0]
+        # for every path in paths
+        for path in paths:
+            # if the landing city is not in the store
+            if path[1] not in store:
+                # return the destination city
+                return path[1]
+        
