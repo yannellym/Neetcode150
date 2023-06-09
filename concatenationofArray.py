@@ -47,3 +47,57 @@ class Solution(object):
         store = nums
         store.extend(nums)
         return store
+
+     
+# better solution
+class Solution(object):
+    def getConcatenation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+
+        # the length of nums
+        n = len(nums)
+        # array of 2n length
+        store = [0] * (n*2)
+
+        # l will start at 0 and r will start at n
+        l = 0
+        r = n
+
+        # for every integer in nums
+        for i in nums:
+            # store the interger in store[l] and store[r]
+            store[l] = i
+            store[r] = i
+            # increase the pointers
+            l+=1
+            r+=1
+        return store
+
+    # another solution
+    
+    class Solution(object):
+    def getConcatenation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+
+        # the length of nums
+        n = len(nums)
+        # array of 2n length
+        store = [0] * (n*2)
+
+        # l will start at 0 
+        l = 0
+
+        # for every integer in nums
+        for i in nums:
+            # store the interger in store[l] and store[r]
+            store[l] = i
+            store[l+n] = i
+            # increase the pointer
+            l += 1
+        return store
