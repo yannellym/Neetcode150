@@ -38,6 +38,37 @@
 # 38.8%
 
 
+# new documentation
+
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        """
+        :type intervals: List[List[int]]
+        :type newInterval: List[int]
+        :rtype: List[List[int]]
+        """
+
+
+        res = []
+
+        # iterate through every sub in intervals
+        for sub in range(len(intervals)):
+            # if the new interval's[1] is < than intervals[sub][1] just add the new interval to the res 
+            # and return res + intervals after this current one 
+            if newInterval[1] < intervals[sub][0]:
+                res.append(newInterval)
+                return res + intervals[sub:]
+            # else if the newInterval's 0 is greater than intervals sub 1, just append to the res
+            elif newInterval[0] > intervals[sub][1]:
+                res.append(intervals[sub])
+            # else, take the min and max between both
+            else:
+                newInterval = [min(newInterval[0], intervals[sub][0]), max(newInterval[1], intervals[sub][1])]
+        # dont forget to append the newinterval in case the func above didnt executre
+        res.append(newInterval)
+        return res
+       
+
 class Solution(object):
     def insert(self, intervals, newInterval):
         """
