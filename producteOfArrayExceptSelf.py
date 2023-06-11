@@ -34,7 +34,46 @@
  
 
 # Follow up: Can you solve the problem in O(1) extra space complexity? (The output array does not count as extra space for space complexity analysis.)
-  
+# better example      
+class Solution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        res = [1] * len(nums)
+        # [1, 1, ,1 , 1]
+        
+        prefix = 1
+        for i in range(len(nums)):
+            # 0 -> res[0] = 1
+            # 1 -> res[1] = 1
+            # 2 -> res[2] = 2
+            # 3 -> res[3] = 6
+            res[i] = prefix
+            # 0 -> prefix = 1
+            # 1 -> prefix = 2
+            # 2 -> prefix = 6
+            # 3 -> prefix = 24
+            prefix = prefix * nums[i]
+        # res= [1,1,2,6]
+            
+        postfix = 1
+        for i in range(len(nums)-1, -1, -1):
+            # res[3] = [1,1,2,6] 1*6
+            # res[2] = [1,1,8,6] 4*2
+            # res[1] = [1,12,8,6] 12*1
+            # res[0] = [24,12,6,8] 21*1
+            res[i] = res[i] * postfix
+            # postfix = 1 * 4 = 4
+            # postfix = 4 * 3 = 12
+            # postfix = 12 * 2 = 24
+            # postfix = 24 * 1 = 24
+            postfix = postfix * nums[i]
+        return res       
+        
+     
+ 
  class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         res = [1] * len(nums)
