@@ -98,21 +98,24 @@ class Solution(object):
         return sum(stack)
 
        # optimized:
-       class Solution(object):
+     class Solution(object):
     def calPoints(self, operations):
         """
         :type operations: List[str]
         :rtype: int
         """
-        stack = []
-        for op in ops:
-            if op == "C":
-                stack.pop()
-            elif op == "D":
-                stack.append(stack[-1] * 2)
-            elif op == "+":
-                stack.append(stack[-1] + stack[-2])
+        scores = []
+
+        for char in operations:
+            if char == "D":
+                scores.append( 2 * scores[-1] if scores else 0)
+            elif char == "+":
+                scores.append(scores[-1] + scores[-2])
+            elif char == "C":
+                scores.pop()
             else:
-                stack.append(int(op))
-        return sum(stack)
+                scores.append(int(char))
+
+
+        return sum(scores)
        
