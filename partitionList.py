@@ -47,28 +47,31 @@ class Solution(object):
         :type x: int
         :rtype: ListNode
         """
-        list1 = []
-        list2 = []
+        left = ListNode()
+        right = ListNode()
+        
+        l = left
+        r = right
+
         curr = head
 
         while curr:
-            if curr.val < x:
-                list1.append(curr.val)
-            else:
-                list2.append(curr.val)
+            if curr.val < x :
+                l.next = curr
+                l = l.next
+            else: 
+                r.next = curr
+                r = r.next
+         
             curr = curr.next
-        
-        dummy = ListNode(0)
-        curr = dummy
 
-        for i in range(len(list1)):
-            curr.next = ListNode(list1[i])
-            curr = curr.next
+        # need to advance the subnodes themselves not the heads
+        r.next = None
+        l.next = right.next
+       
         
-        for i in range(len(list2)):
-            curr.next = ListNode(list2[i])
-            curr = curr.next
-        return dummy.next
+        return left.next
+
         
 
 
