@@ -85,7 +85,9 @@ class Solution(object):
         # 1 -> 2 -> 3 ->    new_head 4 -> 5 ->
         new_head = new_tail.next
         # cut the first list :  1 -> 2 -> 3 -> None
+        # end the first list by setting it's next to None
         new_tail.next = None
+        # set the next pointer of the original tail. to be equal to the head.
         # new_head 4 -> 5 -> 1 -> 2 -> 3 -> None
         tail.next = head
 
