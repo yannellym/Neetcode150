@@ -44,6 +44,7 @@
 #         self.val = val
 #         self.next = next
 class Solution(object):
+    class Solution(object):
     def reverseBetween(self, head, left, right):
         """
         :type head: ListNode
@@ -58,7 +59,9 @@ class Solution(object):
         # Find the node before the sublist
         for _ in range(left - 1):
             cur = cur.next
+       
         firstHalf = cur
+        print(firstHalf)
 
         # Reverse the sublist
         prev = None
@@ -70,8 +73,15 @@ class Solution(object):
             curr = temp
 
         # Connect the reversed sublist to the remaining list
+        # 1-> ->  5
         firstHalf.next.next = curr
+        # 1-> 4 -> 3 -> 2 ->  5
         firstHalf.next = prev
+
+        return dummy.next
+
+        # 1- > None   None <- 2 <- 3 <- 4  5
+
 
         return dummy.next
 
