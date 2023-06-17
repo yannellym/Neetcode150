@@ -74,17 +74,19 @@ class Solution(object):
         if k == 0:
             return head
 
-        # Connect the tail to the head to form a circular list
-        tail.next = head
-
         # Traverse to the new tail position
         steps = length - k
         new_tail = head
+        # steps -1 because we are already in the first position.
         for _ in range(steps - 1):
             new_tail = new_tail.next
 
-        # Break the circular list at the new tail position
+        # save new_tail.next since itll be the new head
+        # 1 -> 2 -> 3 ->    new_head 4 -> 5 ->
         new_head = new_tail.next
+        # cut the first list :  1 -> 2 -> 3 -> None
         new_tail.next = None
+        # new_head 4 -> 5 -> 1 -> 2 -> 3 -> None
+        tail.next = head
 
         return new_head
