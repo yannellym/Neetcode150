@@ -65,7 +65,7 @@ class Solution(object):
          
             curr = curr.next
 
-        # need to advance the subnodes themselves not the heads
+        # connect the l'next to the head.next of the second list
         r.next = None
         l.next = right.next
        
