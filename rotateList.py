@@ -56,8 +56,8 @@ class Solution(object):
         # have slow.next = None
         # and fast.next = head
 
-
-        
+  
+         
         if not head:
             return None
 
@@ -70,7 +70,8 @@ class Solution(object):
 
         # Adjust the rotation amount if it exceeds the length
         k = k % length
-
+       # In the case where k is equal to the length of the list, the loop does not execute,
+        #  and the new tail remains at the head of the list.
         if k == 0:
             return head
 
