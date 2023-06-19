@@ -59,7 +59,8 @@ class Solution(object):
         # Find the node before the sublist
         for _ in range(left - 1):
             cur = cur.next
-       
+        # the idea is to save the first half under a variable
+        # dont set the .next of the first half to none as we will need it to refer to .next.next 
         firstHalf = cur
         print(firstHalf)
 
