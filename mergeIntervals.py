@@ -57,3 +57,26 @@ class Solution(object):
                 # else, just append the current subarray
                 res.append([start,end])
         return res
+
+
+# alternative 
+
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        intervals.sort()
+        
+        res = [intervals[0]]
+        for inter in intervals:
+            if inter[1] < res[-1][0]:
+                res.append(inter)
+            elif inter[0] <= res[-1][1]:
+                hold = [min(res[-1][0] , inter[0]), max(res[-1][1], inter[1])]
+                res[-1] = hold
+            else:
+                res.append(inter)
+        return res
+
