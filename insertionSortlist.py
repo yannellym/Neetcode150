@@ -68,16 +68,27 @@ class Solution(object):
             # this is to help us iterate from the beginning of the linked list
             temp =  dummy
             # while curr.val is greater than the temp's next val,
+            # once the loop stops, we have found our curr.next that is less
             while curr.val > temp.next.val:
                 # let our temp become temp.next ( move to the right)
                 temp = temp.next
+
+             # dummy ->  prev2 -> curr1 -> curr.next4
             # our prev's next is now curr.next
+            # dummy ->  prev2 -> curr.next4
             prev.next = curr.next
+
             # our current's next becomes temp.next
+            # dummy -> curr1 -> 2 -> curr.next4
             curr.next = temp.next
+
             # our temp's next equals curr
+            # dummy -> 1 -> prev2  curr4 -> curr.next3
             temp.next = curr
+
             # curr becomes prev.next
+            # dummy -> 1 -> prev2 -> curr4 -> curr.next3
             curr = prev.next
         # return dummy.next 
         return dummy.next
+
