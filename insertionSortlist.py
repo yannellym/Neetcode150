@@ -43,52 +43,38 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution(object):
     def insertionSortList(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
-        # create a dummy node to later refer to its next
-        dummy = ListNode(0,head)
-        # prev will be our head and curr will be head.next
-        prev, curr = head,head.next
-        # we can't go back so keep a previous pointer 
-        
-        # while we have a curr
+        dummy = ListNode()
+        curr = head
+
         while curr:
-            # if the current value is greater than or equal to the prev value
-            # just update the prev to equal the curr, and the curr to equal curr.next
-            # this means that this subportion is already sorted to continue
-            if curr.val >= prev.val:
-                prev = curr
-                curr = curr.next
-                continue
-            # else, we set a temp variable to be our dummy
-            # this is to help us iterate from the beginning of the linked list
-            temp =  dummy
-            # while curr.val is greater than the temp's next val,
-            # once the loop stops, we have found our curr.next that is less
-            while curr.val > temp.next.val:
-                # let our temp become temp.next ( move to the right)
-                temp = temp.next
+            # At each iteration, we insert an element into the resulting list.
+            prev = dummy
 
-             # dummy ->  prev2 -> curr1 -> curr.next4
-            # our prev's next is now curr.next
-            # dummy ->  prev2 -> curr.next4
-            prev.next = curr.next
+            # find the position to insert the current node
+            while prev.next and prev.next.val <= curr.val:
+                prev = prev.next
 
-            # our current's next becomes temp.next
-            # dummy -> curr1 -> 2 -> curr.next4
-            curr.next = temp.next
+            # store the curr's next
+            next = curr.next
+            
+            # insert the current node to the new list
+            # connect the lesser val to the greater val
+            curr.next = prev.next
+            # connect prev to curr
+            prev.next = curr
 
-            # our temp's next equals curr
-            # dummy -> 1 -> prev2  curr4 -> curr.next3
-            temp.next = curr
+            # moving on to the next iteration
+            curr = next
 
-            # curr becomes prev.next
-            # dummy -> 1 -> prev2 -> curr4 -> curr.next3
-            curr = prev.next
-        # return dummy.next 
         return dummy.next
-
