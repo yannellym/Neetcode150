@@ -37,7 +37,6 @@
 # Acceptance Rate
 # 68.8%
 
-
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, val=0, next=None):
@@ -55,14 +54,15 @@ class Solution(object):
 
         curr = head
 
-        for i in range(k-1):
+        for i in range(1,k):
             curr = curr.next
 
-        # save the left node
+        # save the left node we will swap value of 
         left = curr
+        # delclare right at head to iterate over list
         right = head
 
-        # starting at the left node, iterate until the end of the list
+        # starting at the curr node from above, iterate until the end of the list
         while curr.next:
             # move curr
             curr = curr.next
@@ -71,4 +71,5 @@ class Solution(object):
         
         left.val, right.val = right.val, left.val
         return head
+
 
