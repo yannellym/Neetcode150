@@ -100,3 +100,38 @@ class Solution(object):
 # then we make the first's half.next.next = equal the curr of the reversed list
 # then make firsthalf's.next = prev
 # return the dummy's next
+
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverseBetween(self, head, left, right):
+        """
+        :type head: ListNode
+        :type left: int
+        :type right: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(0, head)
+        curr = dummy
+
+        for i in range(left-1):
+            curr = curr.next
+
+        sub_h = curr.next
+        org = curr
+
+        prev = None
+        for i in range(right - left +1):
+            temp = sub_h.next
+            sub_h.next = prev
+            prev = sub_h
+            sub_h = temp
+
+        org.next.next = sub_h
+        org.next = prev
+        return dummy.next
+        
