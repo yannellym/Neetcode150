@@ -103,7 +103,70 @@ class Solution(object):
         
         return dummy.next
             
+# more fficient 
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
+
+class Solution(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+
+ 
+        # the idea is to merge two lists at a time
+        # step 1: while the len of lists is greater than 0, iterate in steps of 2
+            # take each starter node of both lists, and call the mergeSort func on it
+            # the merge func will return a sorted list and insert in the mergedLists array
+             # [ [1,1,2,3,4,4,5], [2,6]]
+            # lists will now equal the mergedlists array
+        # step 2:
+            # the while loop will iterate again 
+            # we will do the same process and compare the heads of both lists in the array(thus combining them correctly)
+        # return the head of list from the lists array
+
+    
+        if not lists or len(lists) == 0:
+            return None
+
+        # while we have pairs (lists len > 1)
+        while len(lists) > 1:
+            # to store our temporary merged lists
+            mergedLists = []
+            # we iterate in 2's in order to get every pair of nodes
+            for i in range(0, len(lists), 2):
+                l1 = lists[i]
+                # it might just happen that the lists len is odd so we add an error handling
+                l2 = lists[i+1] if (i+1) < len(lists) else None
+                # call mergeSort on both lists
+                mergedLists.append(self.mergeSort(l1, l2))
+    
+            lists = mergedLists
+        return lists[0]
+
+    def mergeSort(self, l1, l2):
+        dummy = ListNode(0)
+        curr = dummy
+
+        while l1 and l2:
+            if l1.val < l2.val:
+                curr.next = l1
+                l1 = l1.next
+            else:
+                curr.next = l2
+                l2 = l2.next
+            curr = curr.next
+
+        if l1:
+            curr.next = l1
+        if l2:
+            curr.next = l2
+        return dummy.next
 
 
 
