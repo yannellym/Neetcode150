@@ -48,12 +48,18 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution(object):
     def insertionSortList(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
+    
         dummy = ListNode()
         curr = head
 
@@ -64,10 +70,15 @@ class Solution(object):
             # find the position to insert the current node
             while prev.next and prev.next.val <= curr.val:
                 prev = prev.next
+            
 
             # store the curr's next
             next = curr.next
             
+            # * we're setting the curr's node next to be the prev's next
+              # this means we're setting it at the beginning of list
+              # then making the prev.next = curr
+              # then update curr
             # insert the current node to the new list
             # connect the lesser val to the greater val
             curr.next = prev.next
@@ -76,5 +87,7 @@ class Solution(object):
 
             # moving on to the next iteration
             curr = next
+            print(dummy.next)
 
         return dummy.next
+
