@@ -57,3 +57,35 @@ class KthLargest:
             heapq.heappop(self.heap)
         # return the first one in the heap. 
         return self.heap[0]
+
+
+# alternative 
+
+# alternative 
+import heapq
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+
+        # create an array to store our digits in
+        s = []
+        # heapify the arr
+        heapq.heapify(s)
+
+        # for every digit in nums, add it to the heap as a negative value
+        # the idea is that all of the positive values will turn -, and viserversa
+        for d in nums:
+            heapq.heappush(s, -d)
+
+  
+        res = 0
+        # iterate k times
+        for i in range(k):
+            # get the kth element and negate it
+            res = -heapq.heappop(s)
+        return res
