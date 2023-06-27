@@ -153,6 +153,28 @@ class Solution(object):
         res = self.merge(l, mid, r, nums)
         return res 
 
+
+# bubble sort
+       # bubble sort O(n^2)
+        # set the swapped flag to true
+        '''
+        has_swapped = True
+        # while the flag is True
+        while has_swapped:
+            # set flag to false
+            has_swapped = False
+            # iterate i the length of nums-1
+            for i in range(len(nums)-1):
+                # iterate j the length of nums-1
+                for j in range(len(nums)-1):
+                    # if nums j is greater than nums j +1 
+                    if nums[j] >nums[j+1]:
+                        # swap them
+                        nums[j], nums[j+1] = nums[j+1], nums[j]
+                        # set flag to True
+                        has_swapped = True
+        return nums
+        '''
         
 
          
