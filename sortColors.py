@@ -33,6 +33,49 @@
 # nums[i] is either 0, 1, or 2.
 
 
+# more fficient
+class Solution(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        l = 0
+        r = len(nums) - 1
+        i = 0
+
+        while i <= r:
+            # If nums[i] is 0, it is swapped with the element at index l, and both l and i are incremented.
+            if nums[i] == 0:
+                nums[i], nums[l] = nums[l], nums[i]
+                l += 1
+                i += 1
+            # If nums[i] is 2, it is swapped with the element at index r, and r is decremented. 
+            # the element at index i is not swapped because the value at r is not known yet 
+            # and needs to be checked.
+            elif nums[i] == 2:
+                nums[i], nums[r] = nums[r], nums[i]
+                r -= 1
+            # If nums[i] is 1, i is simply incremented.
+            else:
+                i += 1
+        
+
+    '''
+        In this part of the code, we're checking if the current element at index i in the nums array is 
+        equal to 2. If it is, we perform a swap between the element at index i and the element at index r,
+        and then we decrement the value of r by 1.
+
+        The reason why we don't increment i after the swap is that the element at index i after the swap    is now an unknown value. It could be a 0, 1, or 2 that was previously at index r, so we need to     re-evaluate this new element before moving to the next iteration.
+
+        By swapping the element at index i with the element at index r, we effectively move the current 2 towards the end of the array. After the swap, the element originally at index r is now at index i. We then decrement r by 1 to ensure that the next 2, if any, will be placed correctly towards the end of the array.
+    '''
+
+
+
+
+# alternative 
+
 class Solution(object):
     def sortColors(self, nums):
         """
