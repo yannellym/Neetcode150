@@ -74,6 +74,7 @@ class TimeMap(object):
         """
 
         # get the values (lists) stored in the key slot
+     # need to make sure that if there's no key in the store that matches this, we get an emppty array
         values = self.store.get(key,[])
 
         l = 0
@@ -85,6 +86,7 @@ class TimeMap(object):
         while l<=r:
             m = (l+r)//2
             if values[m][1] <= timestamp :
+             # we are only updating res if the value is <= to timestamp
                 res = values[m][0]
                 l = m+1
             else:
