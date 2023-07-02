@@ -67,4 +67,31 @@ class Solution(object):
         output.append(node.val)
         # look through all of the nodes on the right
         self.inorder(node.right, output)
+
+
+
+
+# alternative
+
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+
+        self.inOrder(root, res)  
+        return res
+    
+    def inOrder(self, r, res):
+
+        if not r:
+            return
+        
+        self.inOrder(r.left, res)
+        res.append(r.val)
+        self.inOrder(r.right, res)
+        
+    
     
