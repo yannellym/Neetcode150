@@ -59,3 +59,6 @@ class Solution:
         self.invertTree(root.right)
         # return the root in order to see the tree
         return root
+  
+     # invert means: look at every single node
+         # look at its children, and swap the positions of the children
