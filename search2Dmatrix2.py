@@ -71,3 +71,38 @@ class Solution(object):
         # if the return statement doesnt execute, return False
         return False
 
+# alternative 
+
+class Solution(object):
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        # flatten it
+        # binary search it
+
+        # flatten the array into one array
+        store = [ x for sub in matrix for x in sub ]
+
+        # point to both ends of the array
+        l = 0
+        r = len(store) - 1
+
+        # while left is not greater than r
+        while l < r:
+            # get the middle
+            mid = (l+r)//2
+
+            # if the middle value of the array equals the target, return True
+            if store[mid] == target:
+                return True
+            # if the middle value of the array is greater than target, let's eliminate that half and r will equal mid - 1 
+            elif store[mid] > target:
+                r = mid - 1
+            # if the middle value of the array is less than target, let's eliminate that half and l will equal mid + 1 
+            else:
+                l = mid + 1
+        # we might be in the last comparison so we still have to check if we got the target number in the array
+        return True if store[l] == target else False
