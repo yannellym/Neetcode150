@@ -72,6 +72,6 @@ class Solution(object):
                 if len(diffs) > 2:
                     return False  # If there are more than two differences, we can't make the strings equal by swapping letters
         print(diffs)
-        return len(diffs) == 2 and diffs[0] == diffs[1][::-1]  
+        return len(diffs) == 2 and diffs[0] == diffs[1][::-1]   # .reverse() is only specific to lists, [::-1] can reverse iterable objects.
         # If there are exactly two differences, check if swapping them makes the strings equal
                     
