@@ -65,3 +65,33 @@ class Solution(object):
         #     return max(dfs(root.left, depth + 1), dfs(root.right, depth + 1))
                        
         # return dfs(root, 0)
+
+# alternative:
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        
+        return self.count(root, 1)
+        
+
+        
+    def count(self,r,num):
+        if not r.left and not r.right:
+            return num
+
+        left_depth = self.count(r.left, num + 1) if r.left else 0
+        right_depth = self.count(r.right, num + 1) if r.right else 0
+
+        return max(left_depth, right_depth)
+        
