@@ -53,30 +53,30 @@ class Solution(object):
         :rtype: int
         """
 
-        
-        def diameterOfBinaryTreeHelper(node):
-            if node is None:
-                return 0
-            # Recursively calculate the heights of the left and right subtrees by calling the 
-            # diameterOfBinaryTreeHelper function on the left and right children of the current node.
-            left_height = diameterOfBinaryTreeHelper(node.left)
-            right_height = diameterOfBinaryTreeHelper(node.right)
-
-            # Calculate the diameter of the current node as the sum of the heights of the left and right subtrees.
-            current_diameter = left_height + right_height
-            # Update the maximum diameter seen so far by comparing it with the diameter of the current node.
-            max_diameter[0] = max(max_diameter[0], current_diameter)
-            # Return the height of the current node as the maximum height of the left and right subtrees plus 1.
-            return max(left_height, right_height) + 1
-
 
         max_diameter = [0]
-        diameterOfBinaryTreeHelper(root)
+        self.diameterOfBinaryTreeHelper(root, max_diameter)
         return max_diameter[0]
 
 
-        #The algorithm has a time complexity of O(N), where N is the number of nodes in the binary tree.
+    def diameterOfBinaryTreeHelper(self, node, max_d):
+        if node is None:
+            return 0
+        # Recursively calculate the heights of the left and right subtrees by calling the 
+        # diameterOfBinaryTreeHelper function on the left and right children of the current node.
+        left_height = self.diameterOfBinaryTreeHelper(node.left, max_d)
+        right_height = self.diameterOfBinaryTreeHelper(node.right,max_d)
 
+        # Calculate the diameter of the current node as the sum of the heights of the left and right subtrees.
+        current_diameter = left_height + right_height
+        # Update the maximum diameter seen so far by comparing it with the diameter of the current node.
+        max_d[0] = max(max_d[0], current_diameter)
+        # Return the height of the current node as the maximum height of the left and right subtrees plus 1.
+        return max(left_height, right_height) + 1
+
+
+        #The algorithm has a time complexity of O(N), where N is the number of nodes in the binary tree.
+        # this algo basically starts bottoms up, then looks at each node and counts the length of the left and right sides and adds 1. This will set the height of each individual subtree. Then, it will calculate the current diameter as the sum of those two. Lastly, it updates the max diameter. 
     '''
     In the case of the max_diameter variable, we want to modify it within the diameterOfBinaryTreeHelper `function and keep track of the maximum diameter seen so far. If we simply declare max_diameter = 0 within the diameterOfBinaryTreeHelper function, any modifications made to max_diameter will create a new local variable instead of modifying the outer variable.
 
