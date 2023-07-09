@@ -17,26 +17,32 @@
 # Explanation: We can put 3 'B' in one basket and two 'C' in the other basket. 
 # This can be done if we start with the second letter: ['B', 'C', 'B', 'B', 'C']
 
-def fruitsbaskets(arr):
-  res = 0
-  store = {}
-  win_start = 0
-  for win_end in range(len(arr)):
-    right_char = arr[win_end]
-    if right_char not in store:
-      store[right_char] = 0
-    store[right_char] += 1
+class Solution(object):
+    def totalFruit(self, fruits):
+        """
+        :type fruits: List[int]
+        :rtype: int
+        """
+        
+        win_s = 0
+        max_fruits = 0
+        store = dict()
 
-    while len(store) > 2:
-      left_char = arr[win_start]
-      store[left_char] -= 1
-      if store[left_char] == 0:
-        del store[left_char]
-      win_start += 1
-    res = max(res, win_end - win_start + 1)
-  return res
+        # iterate through all fruits
+        for win_e in range(len(fruits)):
+            # if not in fruit, add it and add +1
+            # if in fruit, add +1 
+            store[fruits[win_e]] = 1 + store.get(fruits[win_e], 0)
 
-
-
-fruitsbaskets(['A', 'B', 'C', 'B', 'B', 'C'])
-  
+            # if we ever have more than 2 diff types of fruit, make our window smaller
+            if len(store) > 2: 
+                # subtract from the fruit at index win_s of fruits
+                store[fruits[win_s]] -=1
+                # if the key has a value of 0, delete it
+                if store[fruits[win_s]] == 0:
+                    del store[fruits[win_s]]
+                # increase your left index for the window
+                win_s += 1
+            # compare the max number of fruits you have been able to pick so far, with the running max
+            max_fruits = max(max_fruits, win_e - win_s + 1)
+        return max_fruits
