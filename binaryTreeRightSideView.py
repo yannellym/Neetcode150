@@ -35,6 +35,49 @@
 #         self.left = left
 #         self.right = right
 
+# MORE PRECISE
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def rightSideView(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        # if there's no root, return []
+        if root is None:
+            return []
+
+        q = [root]
+        res = []
+
+        # while we have a q
+        while q:
+            # save its length
+            size = len(q)
+            # loop ith amount of times with ith being the size of the q subarray
+            for i in range(size):
+                # pop the first element in the q
+                node = q.pop(0)
+                # if the index matches the index of the last element in the q (size -1)
+                if i == (size - 1):
+                    # append the value to the res
+                    res.append(node.val)
+                # keep adding the left and right nodes if the tree has them. 
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+        
+        return res
+
+
+# ALTERNATIVE
 
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
