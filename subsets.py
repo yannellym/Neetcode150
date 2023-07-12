@@ -34,31 +34,48 @@
 # Acceptance Rate
 # 74.8%
 
-
 class Solution(object):
-#     def subsets(self, nums):
-#         """
-#         :type nums: List[int]
-#         :rtype: List[List[int]]
-#         """
-#         # start a list with an empty sublist
-#         subsets = [[]]
-#         # for every number in num 
-#         for num in nums:
-#             # loop ith amount of times with i being the len of the subsets
-#             for i in range(len(subsets)):
-#                 # choose the ith subset in the subsets arr
-#                 currSubset = subsets[i]
-#                 print(currSubset + [num])
-#                 # to subsets, append the currsubset and the num
-#                 subsets.append(currSubset + [num])
-#         return subsets
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        # start with an array with an empty list
+        res = [ [] ]
 
-#         # appended to subset each time
-#         # [1]
-#         # [2]
-#         # [1, 2]
-#         # [3]
-#         # [1, 3]
-#         # [2, 3]
-#         # [1, 2, 3]
+        # for every number is nums
+        for i in nums:
+            # iterate jth amount of times with j being the length of res
+            for j in range(len(res)):
+           
+                #to the res append: combined res[j] and res[i]
+                res.append(res[j]+[i])
+        return res
+
+        # basically, it will go through nums, and iterate the length of res,
+        # it will add each subarray in res and append the [i] to it
+
+
+
+#     Input
+# nums =
+# [1,2,3]
+
+# Stdout
+# [[]]
+# [1]
+# [[], [1]]
+# [2]
+# [[], [1], [2]]
+# [1, 2]
+# [[], [1], [2], [1, 2]]
+# [3]
+# [[], [1], [2], [1, 2], [3]]
+# [1, 3]
+# [[], [1], [2], [1, 2], [3], [1, 3]]
+# [2, 3]
+# [[], [1], [2], [1, 2], [3], [1, 3], [2, 3]]
+# [1, 2, 3]
+
+
+# [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
