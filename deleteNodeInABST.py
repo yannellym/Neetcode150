@@ -104,3 +104,68 @@ class Solution:
         # https://www.youtube.com/watch?v=wMyWHO9F1OM&ab_channel=TimothyHChang
 
 # The function takes two arguments, root which represents the root of the current subtree, and key which is the value of the node to be deleted.
+
+
+# alternative explanation
+class Solution(object):
+    def deleteNode(self, root, key):
+        """
+        :type root: TreeNode
+        :type key: int
+        :rtype: TreeNode
+        """
+
+        '''
+        If the node to be deleted is a leaf node (i.e., it has no children), we can simply remove it 
+        from the tree.
+        If the node to be deleted has only one child, we can replace the node with its child.
+        If the node to be deleted has two children, we need to find the inorder successor (or inorder 
+        predecessor) of the node. The inorder successor is the smallest node in the right subtree of 
+        the node, while the inorder predecessor is the largest node in the left subtree of the node. 
+        We can then replace the node to be deleted with the inorder successor (or predecessor) and 
+        delete the inorder successor (or predecessor) from its original position.
+
+        '''
+        # if there's no root,
+        if root is None:
+            # return none
+            return None
+        # if the key < root.val, root.left will equal the result of 
+        # calling deleteNode on root.left
+        if key < root.val:
+            root.left = self.deleteNode(root.left, key)
+        # if the key is greater than the root val, root.right
+        # will equal the result of calling deleteNode on root.right
+        elif key > root.val:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            # else, 
+            # if the root.left is none return root.right
+            if root.left is None:
+                return root.right
+            # if root.right is None, return root.left
+            elif root.right is None:
+                return root.left
+            else:
+                # If the root has both left and right children, 
+                # find the inorder successor (or predecessor) of the root, 
+                # replace the value of the root with the value of the inorder successor (or predecessor), 
+                # and recursively delete the inorder successor (or predecessor) from the right subtree.
+                successor = self.findSuccessor(root.right)
+                #we are replacing the value of the node to be deleted (i.e., root) 
+                # with the value of its inorder successor (or predecessor)
+                root.val = successor.val
+                # By calling self.deleteNode(root.right, successor.val), we are passing the right 
+                # subtree of root as the new root and the value of the inorder successor (or predecessor)
+                # as the key to be deleted. This recursive call will handle the deletion of the inorder 
+                # successor (or predecessor) in the right subtree.
+                root.right = self.deleteNode(root.right, successor.val)
+        
+        return root
+
+    def findSuccessor(self, node):
+        #Since the inorder successor is the smallest node in the right subtree, 
+        # we keep moving to the left until we reach the leftmost node of the right subtree.
+        while node.left:
+            node = node.left
+        return node
