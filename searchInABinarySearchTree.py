@@ -65,3 +65,28 @@ class Solution:
         # return current which will be none at the end of the tree,
         return curr
   
+# recusrive approach
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def searchBST(self, root, val):
+        """
+        :type root: TreeNode
+        :type val: int
+        :rtype: TreeNode
+        """
+        # if the root is none, or the value of the root equals the value
+        if root is None or root.val == val:
+            # return the root
+            return root
+        # else if the value is less than the root value, search on the left
+        elif val < root.val:
+            return self.searchBST(root.left, val)
+        else:
+            # if the root value is greater than the root, search on the right
+            return self.searchBST(root.right, val)
