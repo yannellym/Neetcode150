@@ -46,6 +46,38 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# recursive method
+
+class Solution(object):
+    def insertIntoBST(self, root, val):
+        """
+        :type root: TreeNode
+        :type val: int
+        :rtype: TreeNode
+        """
+        if not root:
+            return TreeNode(val)  # Create a new node and return it as the root of the tree
+
+        if root.val > val:
+            root.left = self.insertIntoBST(root.left, val)  # Insert in the left subtree recursively
+        else:
+            root.right = self.insertIntoBST(root.right, val)  # Insert in the right subtree recursively
+        
+        return root
+
+        '''
+        In both cases, the recursive call effectively traverses down the tree until it finds the
+         appropriate position to insert the new node. The recursion continues until it reaches a
+          None node (end of a branch), at which point it creates a new node with the value val 
+          and returns it. The returned node is then assigned as the new child of the root node, 
+          effectively inserting the new node into the tree.
+        '''
+
+
+
+
+
 class Solution:
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         # if there is no root, return a node with val inside
