@@ -95,3 +95,48 @@ class Solution(object):
         # return the minimum window substring
         return min_window
 
+# alternative 
+
+def StringChallenge(strArr):
+    n_store = {}
+    k_store = {}
+    matches = {}
+
+    N = strArr[0]
+    K = strArr[1]
+
+    res = []
+
+    # sets up the dictionary for the K String
+    for char in strArr[1]:
+        k_store[char] = 1 + k_store.get(char, 0)
+
+    # sliding window approach
+    win_start = 0
+
+    for win_end in range(len(N)):
+        # add the chars to the n_store
+        n_store[N[win_end]] = 1 + n_store.get(N[win_end], 0)
+
+        # if the char is also in k_store, let add it to our matches dic
+        if N[win_end] in k_store:
+            matches[N[win_end]] = 1 + matches.get(N[win_end], 0)
+
+        # check if all characters in K are in the current window
+        while all(k in matches and matches[k] >= k_store[k] for k in k_store):
+            # calculate the current substring length
+            curr_length = win_end - win_start + 1
+
+            # if the current substring contains all characters in K and it's the smallest found so far,
+            # update the result
+            if curr_length == len(K):
+                res.append(N[win_start: win_end + 1])
+
+            # move the window to the right
+            if N[win_start] in matches:
+                matches[N[win_start]] -= 1
+                if matches[N[win_start]] == 0:
+                    del matches[N[win_start]]
+            win_start += 1
+
+    return min(res)
