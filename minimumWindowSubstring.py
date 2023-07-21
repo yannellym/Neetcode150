@@ -113,6 +113,7 @@ def StringChallenge(strArr):
 
     # sliding window approach
     win_start = 0
+    min_length = float('inf')
 
     for win_end in range(len(N)):
         # add the chars to the n_store
@@ -129,14 +130,3 @@ def StringChallenge(strArr):
 
             # if the current substring contains all characters in K and it's the smallest found so far,
             # update the result
-            if curr_length == len(K):
-                res.append(N[win_start: win_end + 1])
-
-            # move the window to the right
-            if N[win_start] in matches:
-                matches[N[win_start]] -= 1
-                if matches[N[win_start]] == 0:
-                    del matches[N[win_start]]
-            win_start += 1
-
-    return min(res)
