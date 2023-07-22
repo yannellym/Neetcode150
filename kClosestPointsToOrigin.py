@@ -65,3 +65,41 @@ class Solution:
         # at the end, you should have a list of coordinates according to their 
         # min squared values
         return res
+#alternative
+
+import heapq
+import math
+
+
+class Solution(object):
+    def kClosest(self, points, k):
+        """
+        :type points: List[List[int]]
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        # create the heap
+        heap = []
+        # heapify it
+        heapq.heapify(heap)
+        # set our origin values 
+        x2 = 0
+        y2 = 0
+
+        # for every x,y value in points
+        for x1,y1 in points:
+            # compute the euclidian distance
+            value = math.sqrt((((x1 - x2)**2) + ((y1 - y2)**2)))
+            # add a tuple of the square root value and the points to the heap
+            heapq.heappush(heap, (value, [x1,y1]))
+        # our res array
+        res = []
+        # for the length of k
+        for i in range(k):
+            # get the first value from the heap, and the value at index 1, and pop it
+            sub = heapq.heappop(heap)[1]
+            # append it to the sub
+            res.append(sub)
+        
+        return res
+            
