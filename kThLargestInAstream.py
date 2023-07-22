@@ -89,3 +89,6 @@ class Solution(object):
             # get the kth element and negate it
             res = -heapq.heappop(s)
         return res
+
+
+- heapq does not sort all the numbers. It only sorts the smallest numbers first. This is because heapq is a priority queue, which means that it stores the smallest numbers first. When you add a new number to a heapq, it is inserted at the bottom of the heap. The heapq then uses a heapify algorithm to sort the heap so that the smallest numbers are at the top. When you remove a number from a heapq, the heapq uses a heappop algorithm to remove the smallest number from the top of the heap.
