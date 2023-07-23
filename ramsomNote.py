@@ -76,4 +76,33 @@ class Solution(object):
         # # if we were able to replace all chars we saw from ransomnote, we have enough
         # # return true as we can build our ransom note
         # return True
-            
+
+
+
+# alternative
+
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+        if len(magazine) < len(ransomNote):
+            return False
+
+        noteDic = Counter(ransomNote)
+        magDic = {}
+
+        for i in range(len(magazine)):
+            if magazine[i] in ransomNote:
+                magDic[magazine[i]] = 1 + magDic.get(magazine[i], 0)
+
+        
+        for k, v in noteDic.items():
+            if k not in magDic:
+                return False
+            if magDic[k] < v:
+                return False
+        return True
+
