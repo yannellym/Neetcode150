@@ -56,28 +56,34 @@
 
 class MedianFinder(object):
     def __init__(self):
-        self.store = []
-        self.size = 0
+        self.store = []  # List to store the numbers
+        self.size = 0    # Variable to keep track of the number of elements in the list
 
     def addNum(self, num):
         """
         :type num: int
         :rtype: None
         """
-        self.store.append(num)
-        self.size += 1
+        self.store.append(num)  # Add the new number to the list
+        self.size += 1         # Increment the size counter
 
     def findMedian(self):
         """
         :rtype: float
         """
         self.store.sort()  # Sort the list before finding the median
+
         if self.size > 1 and self.size % 2 == 0:
-            mid_right = self.size // 2
-            mid_left = mid_right - 1
+            # If there are more than one element and the number of elements is even
+            mid_right = self.size // 2         # Index of the right middle element
+            mid_left = mid_right - 1           # Index of the left middle element
             median = (float(self.store[mid_left] + self.store[mid_right]) / 2)
+            # Calculate the average of the two middle elements as the median
         else:
             median = float(self.store[self.size // 2])
+            # If there's only one element or the number of elements is odd,
+            # the median is the middle element
+
         return median
 
 
