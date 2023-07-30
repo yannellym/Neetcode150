@@ -27,7 +27,39 @@
 #   ["0","0","0","1","1"]
 # ]
 # Output: 3
- 
+
+
+# alternative class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        def dfs(row, col):
+            # Check if the cell is out of bounds or is water (0)
+            if row < 0 or col < 0 or row >= m or col >= n or grid[row][col] == '0':
+                return
+
+            # Mark the cell as visited (change '1' to '0')
+            grid[row][col] = '0'
+
+            # Explore adjacent cells
+            dfs(row + 1, col)
+            dfs(row - 1, col)
+            dfs(row, col + 1)
+            dfs(row, col - 1)
+
+        m, n = len(grid), len(grid[0])
+        num_islands = 0
+
+        for i in range(m): # rows
+            for j in range(n): # columns 
+                if grid[i][j] == '1': # if its 1, 
+                    num_islands += 1 # increase the num of islands
+                    dfs(i, j) # search the neighbors
+
+        return num_islands
+     
 
 # Constraints:
 
