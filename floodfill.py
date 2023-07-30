@@ -98,3 +98,36 @@ class Solution(object):
         dfs(sr, sc)
         # return the modified image
         return image
+
+
+# alternative 'class Solution(object):
+    def floodFill(self, image, sr, sc, color):
+        """
+        :type image: List[List[int]]
+        :type sr: int
+        :type sc: int
+        :type color: int
+        :rtype: List[List[int]]
+        """
+        def dfs(r,c):
+            if r < 0 or c < 0 or r >= rows or c >= cols or image[r][c] != org_color:
+                return 
+
+            image[r][c] = color
+
+            dfs(r-1, c)
+            dfs(r+1, c)
+            dfs(r, c-1)
+            dfs(r, c+1)
+
+        rows = len(image)
+        cols = len(image[0])
+        # you need to save the original color of image[r][c] in here to refer back to it
+        org_color = image[sr][sc]
+
+        if image[sr][sc] == color:
+            return image
+
+        dfs(sr,sc)
+        
+        return image
