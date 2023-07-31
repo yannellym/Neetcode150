@@ -33,45 +33,34 @@
 # 1 <= m, n <= 10
 # grid[i][j] is 0, 1, or 2.
 
-class Solution(object):
+class Solution:
     def orangesRotting(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
+        fresh_oranges = set()
+        rotten_oranges = []
 
-        fresh, rotten = set(), deque()
-
-        # iterate through the grid to get all the fresh and rotten oranges
-        for row in range(len(grid)):
-            for col in range(len(grid[0])):
-                # if we see a fresh orange, put its position in fresh
-                if grid[row][col] == 1:
-                    fresh.add((row, col))
-
-                # if we see a rotten orange, put its position in rotten
-                elif grid[row][col] == 2:
-                    rotten.append((row, col))
+        # Find all fresh and rotten oranges
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 1:  # If the cell contains a fresh orange
+                    fresh_oranges.add((i, j))  # Add its coordinates to the 'fresh_oranges' set
+                elif grid[i][j] == 2:  # If the cell contains a rotten orange
+                    rotten_oranges.append((i, j))  # Add its coordinates to the 'rotten_oranges' list
 
         minutes = 0
-        while fresh and rotten:
+        while fresh_oranges and rotten_oranges:
+            new_rotten = []
+            for i, j in rotten_oranges:  # For each rotten orange
+                # Check all four neighbors
+                for x, y in ((i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)):
+                    if (x, y) in fresh_oranges:  # If the neighbor is a fresh orange
+                        fresh_oranges.remove((x, y))  # Convert it to rotten by removing it from 'fresh_oranges'
+                        new_rotten.append((x, y))  # Add the converted rotten orange coordinates to 'new_rotten'
+            rotten_oranges = new_rotten  # Update 'rotten_oranges' with the new rotten oranges
+            minutes += 1  # Increment the minutes elapsed
 
-            minutes += 1
+        # Check if there are any fresh oranges left and return accordingly
+        return -1 if fresh_oranges else minutes
 
-            # iterate through rotten, popping off the (row, col) that's currently in rotten
-            # we don't touch the newly added (row, col) that are added during the loop until the next loop
-            for rot in range(len(rotten)):
-                row, col = rotten.popleft()
-
-                for direction in ((row - 1, col), (row + 1, col), (row, col - 1), (row, col + 1)):
-                    if direction in fresh:
-                        # if the (row, col) is in fresh, remove it then add it to rotten
-                        fresh.remove(direction)
-                        # we will perform 4-directional checks on each (row, col)
-                        rotten.append(direction)
-
-        # if fresh is not empty, then there is an orange we were not able to reach 4-directionally    
-        return -1 if fresh else minutes
 
         # Time Compelxity: O(m * n)
         # Space Complexity: O(m * n)
