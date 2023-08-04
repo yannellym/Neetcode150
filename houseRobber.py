@@ -40,11 +40,24 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        rob1, rob2 = 0,0 
-        for n in nums:
-            temp = max(n + rob1, rob2)
-            rob1 = rob2
-            rob2 = temp
-        return rob2
+        #. create two variables to hold our robbed amounts
+        robbed1 = 0
+        robbed2 = 0
+
+        # For every amount in the houses:
+        for amount in nums:
+            # in a temp, save the max amount of either:
+              # the new amount and robbed 1
+
+            # [rob1, rob2, n , n +1, ...  ]
+            # if we want to rob this amount, we can either rob the amount with rob 1 or 
+            # just do rob2 (not with amount since it cant be next to each other)
+            temp = max(amount + robbed1, robbed2)
+            # now we update robbed 1 to to be robbed 2 since we're getting that last value used.
+            robbed1 = robbed2
+            # robbed 2 will now be our temp since we need the updated total so far.
+            robbed2 = temp
+        return temp
+
 
         #https://www.youtube.com/watch?v=73r3KWiEvyk
