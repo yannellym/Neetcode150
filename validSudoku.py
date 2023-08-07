@@ -57,6 +57,43 @@
 # 58.1%
 
 
+# more straight forward approach
+def solution(grid):
+    # a set to store our seen coordinates
+    seen = set()
+    
+    # iterating the through the grid
+    for i in range(9):
+        for j in range(9):
+            # lets name our current value we're looking at
+            current_val = grid[i][j]
+            # if its not a period
+            if current_val != '.':
+                # lets check  the row (each row must have a unique number)
+                # we save the row and number in a tuple (with row serving 
+                # as first value)
+                # ex (row1, value 5)
+                if (i, current_val) in seen:
+                    return False
+                seen.add((i, current_val))
+                
+                # lets check  the column (each column must have a unique number)
+                # we save the column and number in a tuple (with the value serving
+                #  as the first value)
+                # ex (value 2, column 5)
+                if (current_val, j) in seen:
+                    return False
+                seen.add((current_val, j))
+                
+                # Check subgrid (each subgrid must have a unique number)
+                # i// 3 j //3 will map it to the right subsquare
+                # 0//3 = 0 1//3 
+                if (i // 3, j // 3, current_val) in seen:
+                    return False
+                seen.add((i // 3, j // 3, current_val))
+    
+    return True
+
 from collections import defaultdict
 
 class Solution(object):
