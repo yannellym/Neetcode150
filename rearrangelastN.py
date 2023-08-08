@@ -47,25 +47,35 @@ def solution(l, n):
     
     length = 1
     current = l
+    # get the length of the linkedlist
     while current.next:
         length += 1
         current = current.next
-    
+    # if n is greater than or equal to the length, return l
     if n >= length:
         return l
-    
+    # the new head will be length - n
     new_head_position = length - n
     
     current = l
+    # -1 to make sure we stop at the correct node
     for _ in range(new_head_position - 1):
         current = current.next
     
+    
+    # current.next will be the new head since it starts with the portion that needs
+    # to be put at the beginning
     new_head = current.next
+    # now lets make curr.next equal none since this will be our end
     current.next = None
     
+    # curr will be our new head
     current = new_head
+    # while we have nodes in this list
     while current.next:
+        # lets keep looking
         current = current.next
+    # once we dont have anymore nodes, lets attach our first portion to this new head
     current.next = l
     
     return new_head
