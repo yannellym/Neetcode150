@@ -115,3 +115,41 @@ class Solution:
     # at the end of each level iteration, we will have the rightmost value in the var 
     # at the rightmost var's value to the result
     # return the result
+
+
+# alternative
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def rightSideView(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        
+        q = [root] if root else []
+        res = []
+
+
+        while q:
+            length = len(q)
+            sub = []
+            for i in range(length):
+                sel = q.pop(0)
+                if sel.left:
+                    q.append(sel.left)
+                if sel.right:
+                    q.append(sel.right)
+                sub.append(sel.val)
+            
+            
+            for i in range(length-1):
+                sub.pop(0)
+            # print(sub)
+            res.append(sub[0])
+        return res
+
