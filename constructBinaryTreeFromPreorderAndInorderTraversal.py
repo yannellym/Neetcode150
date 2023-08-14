@@ -66,3 +66,29 @@ class Solution:
 # We return the root node with the entire tree constructed.
 
 # https://www.youtube.com/watch?v=ihj4IQGZ2zc&t=1s&ab_channel=NeetCode
+
+
+# better explained 
+
+  # Base case: if either the preorder or inorder list is empty, return None
+        if not preorder or not inorder:
+            return None
+        
+        # Create a root node with the value of the first element in the preorder list
+        root = TreeNode(preorder[0])
+        
+        # Find the index of the root value in the inorder list
+        mid = inorder.index(preorder[0])
+        
+        # Recursive approach:
+        # The left subtree will be constructed from elements in preorder[1:mid+1] and inorder[:mid]
+        # For example, if preorder is [3, 9, 20, 15, 7] and mid is 1 (root value 9 in the 
+        # inorder list), then preorder[1:mid+1] would result in [9], which represents the
+        #    values in the left subtree of the binary tree rooted at 9.
+        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid+1])
+        
+        # The right subtree will be constructed from elements in preorder[mid+1:] and inorder[mid+1:]
+        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+        
+        # Return the root of the constructed binary tree
+        return root
