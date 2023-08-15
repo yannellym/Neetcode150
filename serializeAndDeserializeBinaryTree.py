@@ -61,6 +61,8 @@ class Codec:
     def deserialize(self, data):
 
         def buildTree(vals):
+            if not vals:  # Check if the list is empty
+              return None
             val = vals.pop(0)  # Pop the next value from the list
             if val == "X":
                 return None  # Return None for null nodes
