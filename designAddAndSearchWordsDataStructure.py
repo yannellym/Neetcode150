@@ -85,6 +85,9 @@ class WordDictionary:
                 # for every child value in the node
                 for child in node.children.values():
                     # recursively go down that path 
+                    # If any of these recursive calls returns True, then 
+                    # the entire search should return True, indicating that a 
+                    # match was found somewhere down the line.
                     if self.searchHelper(word[i + 1:], child):  # Recursively search all child nodes
                         return True
                 # If none of the recursive calls return True (i.e., no match was found in any child node),
