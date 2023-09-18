@@ -83,3 +83,20 @@ Acceptance Rate
         res.sort(key= lambda x: (x[1]))
 
         return [x[0] for x in res][:k]
+
+
+# alternative 
+
+class Solution(object):
+    def kWeakestRows(self, mat, k):
+        """
+        :type mat: List[List[int]]
+        :type k: int
+        :rtype: List[int]
+        """
+        store = [ (r, mat[r].count(1)) for r in range(len(mat)) ]
+
+
+        store.sort(key=lambda x: x[1])
+      
+        return [ store[i][0] for i in range(k)]
