@@ -43,6 +43,27 @@ class Solution(object):
         :rtype: bool
         """
 
-        
-
         return all(nums[x] <= nums[x+1] for x in range(len(nums) - 1)) or all(nums[x] >=nums[x+1] for x in range(len(nums) - 1)) 
+
+
+# alternative 
+
+class Solution(object):
+    def isMonotonic(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+
+        incre = True
+        decre = True
+        
+        for i in range(1,len(nums)):
+            if nums[i-1] > nums[i]:
+                incre = False
+            
+            if nums[i-1] < nums[i]:
+                decre = False
+
+        return incre or decre
+
