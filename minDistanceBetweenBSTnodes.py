@@ -68,3 +68,33 @@ class Solution:
         dfs(root)
         # return the res that has been modified. 
         return res
+
+
+# alternative 
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def minDiffInBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.ans = float('inf')  # Initialize with a very large value
+        self.prev = None
+        self.inorder(root)
+        return self.ans
+
+    def inorder(self, root):
+        if root is None:
+            return
+        
+        self.inorder(root.left)
+        if self.prev is not None:
+            self.ans = min(self.ans, abs(root.val - self.prev))
+        self.prev = root.val
+        self.inorder(root.right)
