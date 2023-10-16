@@ -46,6 +46,43 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
+class Solution(object):
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+
+
+        def getDiameter(n):
+            if not n:
+                # if theres no node, we return 0 for length, and 0 for diameter
+                return 0,0 
+                # recursively get the diameter and length for left and right 
+            left_length, left_diameter = getDiameter(n.left)
+            right_length, right_diameter = getDiameter(n.right)
+            
+            #the max length will be the max between the left and right cALLS + 1
+            # the +1 represent the count for the curr node
+            maxlength = 1 +max(left_length, right_length)
+            # the max median will be the max between(the left diameter, the right diameter, and the sum of
+            # the left length plus the right length to count for the root not being in the path)
+            maxdiam = max(left_diameter, right_diameter, left_length + right_length)
+            # we return both values 
+            return maxlength, maxdiam
+
+
+
+        _, diameter = getDiameter(root)
+        return diameter
+
+
+
+
+
+#alternative
 class Solution(object):
     def diameterOfBinaryTree(self, root):
         """
