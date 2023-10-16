@@ -37,6 +37,30 @@
 # Acceptance Rate
 # 38.8%
 
+# simple solution
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        """
+        :type intervals: List[List[int]]
+        :type newInterval: List[int]
+        :rtype: List[List[int]]
+        """
+        merged = []
+        i, n = 0, len(intervals)
+        # Add all intervals ending before newInterval starts
+        while i < n and intervals[i][1] < newInterval[0]:
+            merged.append(intervals[i])
+            i += 1
+        # Merge all intervals that overlap with newInterval
+        while i < n and intervals[i][0] <= newInterval[1]:
+            newInterval = [min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1])]
+            i += 1
+        merged.append(newInterval)
+        # Add all intervals starting after newInterval ends
+        while i < n:
+            merged.append(intervals[i])
+            i += 1
+        return merged
 
 # clever solution
 
