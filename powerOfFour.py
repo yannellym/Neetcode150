@@ -42,6 +42,30 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
+        return n > 0 and log(n, 4) % 1 == 0
+        
+        '''
+        This works because, when n is a power of 4, its logarithm with base 4 will be an integer. For example:
+
+        4^0 = 1, log(1, 4) = 0
+        4^1 = 4, log(4, 4) = 1
+        4^2 = 16, log(16, 4) = 2
+        4^3 = 64, log(64, 4) = 3
+        And so on...
+        In all of these cases, log(n, 4) results in an integer, so log(n, 4) % 1 is equal to 0.
+        However, if n is not a power of 4, then log(n, 4) will result in a non-integer value,
+        and log(n, 4) % 1 will not equal 0, causing the function to return False
+
+        '''
+
+
+
+class Solution(object):
+    def isPowerOfFour(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
         # log solution 
         if n <=0:
             return False
