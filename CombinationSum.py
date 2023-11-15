@@ -82,4 +82,25 @@ class Solution(object):
         return res
 
 
+# backtracking 
 
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def backtrack(start, target, path):
+            if target == 0:
+                # If target is reached, add the current combination to the result
+                result.append(path)
+                return
+            for i in range(start, len(candidates)):
+                if candidates[i] > target:
+                    continue
+                # Explore the combination with the current candidate
+                print(f"Exploring: {path + [candidates[i]]}")
+                backtrack(i, target - candidates[i], path + [candidates[i]])
+                print(f"Backtrack from: {path + [candidates[i]]}")
+
+        result = []
+        candidates.sort()
+        backtrack(0, target, [])
+        return result
+        
