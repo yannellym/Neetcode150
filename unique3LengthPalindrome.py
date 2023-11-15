@@ -84,7 +84,7 @@
     
         res = 0
         for c, (start_idx, end_idx) in store.items():
-            
+             # start at start_idx +1 and go until the second to last in order to exclude the repeating char
             res += len(set(s[start_idx + 1:end_idx]))
         return res
 
