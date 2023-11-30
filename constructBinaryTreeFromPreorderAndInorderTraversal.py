@@ -92,3 +92,29 @@ class Solution:
         
         # Return the root of the constructed binary tree
         return root
+
+
+
+
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        # Check if either the preorder or inorder list is empty
+        if not preorder or not inorder:
+            return None
+
+        # Create a new TreeNode with the value of the first element in preorder
+        root = TreeNode(preorder[0])
+
+        # Find the index of the root value in the inorder list
+        mid = inorder.index(preorder[0])
+
+        # Recursively build the left subtree using elements in preorder and inorder before the root
+        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+
+        # Recursively build the right subtree using elements in preorder and inorder after the root
+        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+
+        # Return the root of the constructed tree
+        return root
+
