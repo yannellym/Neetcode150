@@ -92,4 +92,41 @@ class Solution(object):
                     return True
         
         return False
-                
+
+
+
+
+
+
+
+
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        def checkBoard(r,c,idx):
+          if idx == len(word):
+            return True 
+
+          if r < 0 or r >= rows or c < 0 or c >= cols or board[r][c] != word[idx]:
+            return 
+
+          temp = board[r][c]
+          board[r][c] = "."
+
+          found = (checkBoard(r+1, c, 1 +idx) or checkBoard(r, c+1, 1 +idx) or checkBoard(r-1, c, 1 +idx) or checkBoard(r, c-1, 1 +idx) )
+
+          board[r][c] = temp
+          return found
+
+        rows = len(board)
+        cols = len(board[0])
+
+        for r in range(rows):
+          for c in range(cols):
+            if board[r][c] == word[0] and checkBoard(r,c, 0):
+              return True
+        return False
