@@ -32,3 +32,23 @@ class Solution(object):
         
         
         
+# alternative
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        store = {}
+        res = []
+
+        for word in strs:
+            sorted_word = ''.join(sorted(word))
+            print(sorted_word)
+
+            if sorted_word not in store:
+                store[sorted_word] = []
+            store[sorted_word].append(word)
+      
+        return store.values()
