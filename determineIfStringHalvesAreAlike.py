@@ -72,3 +72,24 @@ class Solution(object):
             i +=1
             j-=1
         return countL == countR
+# third approach
+
+class Solution(object):
+    def halvesAreAlike(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        vowels = set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'])
+
+        n = len(s)
+        l = 0
+        r = 0
+
+        for i in range(n//2):
+            if s[i] in vowels:
+                l +=1
+            if s[(n//2)+i] in vowels:
+                r +=1
+        return l == r
+
