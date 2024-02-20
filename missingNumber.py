@@ -51,6 +51,26 @@ class Solution(object):
         # Get sum of complete series(Gaussian formula) 
         # and find the difference between sum of given series
 
+
+
+
+
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+   
+        n = len(nums)
+        store = set(nums)
+
+        for i in range(n+1):
+            if i not in store:
+                return i
+
+      
+
         # 2 x 2+1
         # 2 X 3 = 6
         # 6 //2 = 3 -1 = 2
