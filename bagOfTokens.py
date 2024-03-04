@@ -54,34 +54,33 @@ Constraints:
 Seen this question in a real interview before?
 1/
 
-class Solution(object):
-    def bagOfTokensScore(self, tokens, power):
-        """
-        :type tokens: List[int]
-        :type power: int
-        :rtype: int
-        """
 
+     # Sort the tokens array
         tokens.sort()
         
-        x = 0
-        y = len(tokens)-1
-        score = 0
-        max_score = 0
-
-
-        while x <= y:
-            if power >= tokens[x] and power > 0:
-               
-                power = power - tokens[x]
-                score +=1 
-                max_score = max(score,max_score)
-                x +=1
+        # Initialize pointers and variables
+        left, right = 0, len(tokens) - 1
+        score = max_score = 0
+        
+        # Loop until left pointer is less than or equal to right pointer
+        while left <= right:
+            # If current power is greater than or equal to token value at left pointer
+            if power >= tokens[left]:
+                # Play token face-up
+                power -= tokens[left]
+                score += 1
+                left += 1
+                # Update maximum score
+                max_score = max(max_score, score)
+            # If current score is greater than zero
             elif score > 0:
-                power = power + tokens[y]
+                # Play token face-down
+                power += tokens[right]
                 score -= 1
-                y -= 1
+                right -= 1
+            # If none of the above conditions are met, break the loop
             else:
                 break
+        
+        # Return the maximum score achieved
         return max_score
-
