@@ -74,3 +74,26 @@ class Solution(object):
                 nums[i] = n
                 i += 1
         return i
+
+# example 3
+
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        count = 1
+        i = 0 
+
+        for j in range(1, len(nums)):
+            if nums[j] == nums[i] and count <2:
+                i += 1
+                nums[i] = nums[j]
+                count += 1
+            elif nums[j] != nums[i]:
+                i += 1
+                nums[i] = nums[j]
+                count = 1
+        return i+1
+
