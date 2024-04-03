@@ -79,3 +79,33 @@ class Solution(object):
                     return x
             # decrement size
             size -= 1
+
+#additional
+class Solution(object):
+    def countSubstrings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        count = 0
+        for i in range(len(s)):
+            # Case 1: Odd length palindromes
+            left = right = i
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                count += 1
+                left -= 1
+                right += 1
+
+            # Case 2: Even length palindromes
+            left = i
+            right = i + 1
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                count += 1
+                left -= 1
+                right += 1
+
+                # Additional optimization: Break the loop if characters at left and right don't match
+                if left >= 0 and right < len(s) and s[left] != s[right]:
+                    break
+
+        return count
