@@ -43,19 +43,29 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-
         stack = []
-        if len(num) == 1: return "0"
 
+        # for every digit in num
         for digit in num:
-            while stack and stack[-1] > digit and k :
+            # while we have a stack and we have k AND 
+            # the top of the stack is GREATER than the current digit
+            # pop the number from the top of the stack and minimize K
+            while stack and k and digit < stack[-1]:
                 stack.pop()
                 k -=1
-            
+            # append the digit to the stack
             stack.append(digit)
-        # this could be a stack like this "0112" k=1
-        # we need to make sure that if we still have a k, we take out the kth digit
-        stack = stack[: len(stack)-k] 
-        # the stack might be empty, if so, return a "0"
-        return str(int(''.join(stack if stack else "0")))
+
+        # there's a possibility that we might have a number like:
+        # '00112' and our method above didnt work. So we would need to:
+        # cut (k) numbers from the stack
+        stack = stack[:len(stack)-k]
+        # now, there might be the possibility that we have '00200'
+        # we cant have leading zeros so we need to:
+        # get the stack if we have a stack,if not just put "0"
+        # then join the numbers in the stack or just "0"
+        # convert to an int so it removes the leading zeroes (if any)
+        # then convert to a string because our answer should be a STR
+        return  str(int(''.join(stack if stack else "0")))
+
 
