@@ -59,9 +59,21 @@ class Solution(object):
 
 
         for card in deck:
-            print(queue, "queue")
+            print(queue)
+            # from our queue, pop the leftmost index, and 
+            # to our result, have that index equal the card in the deque
             result[queue.popleft()] = card
             if queue:
+                # if theres another card, append it to the end
                 queue.append(queue.popleft())
-            print(result)
+
         return result
+
+
+        # deque([0, 1, 2, 3, 4, 5, 6])
+        # deque([2, 3, 4, 5, 6, 1])
+        # deque([4, 5, 6, 1, 3])
+        # deque([6, 1, 3, 5])
+        # deque([3, 5, 1])
+        # deque([1, 5])
+        # deque([5])
