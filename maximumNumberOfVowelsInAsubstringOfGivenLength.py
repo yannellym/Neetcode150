@@ -86,3 +86,40 @@ class Solution(object):
           
             max_vals = max(max_vals,vowels)
         return max_vals
+
+#alternative
+
+class Solution(object):
+    def maxVowels(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: int
+        """
+        vowels = ["a", "e", "i", "o", "u"]
+        store = {}
+        letter_count = 0
+
+        vowel_count = 0
+        max_count = 0
+
+        win_s = 0
+        
+        for win_e in range(len(s)):
+            store[s[win_e]] = 1 + store.get(s[win_e], 0)
+
+            if s[win_e] in vowels:
+               vowel_count +=1
+
+
+            while sum(store.values())  > k :
+                if s[win_s] in vowels:
+                    vowel_count -=1 
+                store[s[win_s]] -= 1
+                if store[s[win_s]] == 0:
+                    del store[s[win_s]]
+                win_s += 1
+     
+            max_count = max(max_count, vowel_count)
+        return  max_count
+
