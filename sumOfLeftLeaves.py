@@ -54,3 +54,34 @@ Constraints:
 
 The number of nodes in the tree is in the range [1, 1000].
 -1000 <= Node.val <= 1000
+
+
+# additional solution
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def sumOfLeftLeaves(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        
+        q = [ root ] if root else []
+        res = 0
+
+        while  q:
+            select = q.pop()
+
+            if select.left:
+                if not select.left.left and not select.left.right:
+                    res += select.left.val
+                q.append(select.left)
+            if select.right:
+                q.append(select.right)
+        return res
+
