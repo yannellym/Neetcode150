@@ -56,3 +56,13 @@ class Solution(object):
         # Step 4: Sort the list
         sorted_common_list = sorted(common_list)
         return sorted_common_list
+
+
+
+or 
+
+       count1 = Counter(arr1)
+        count2 = Counter(arr2)
+        count3 = Counter(arr3)
+        
+        return [num1 for num1 in arr1 if count1[num1] and count2[num1] and count3[num1]]
