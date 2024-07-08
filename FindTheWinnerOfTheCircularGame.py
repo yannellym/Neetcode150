@@ -91,6 +91,31 @@ class Solution(object):
 
             '''
             nums.rotate(1-k)
+
+         from collections import deque
+
+class Solution(object):
+    def findTheWinner(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: int
+        """
+        arr = [i for i in range(1,n+1)]
+        q = deque(arr)
+
+        while len(q) > 1:
+            for i in range(k):
+                if q:
+                    sel = q.popleft()
+                    # print(sel, "sel", i)
+                    if i != (k-1):
+                        q.append(sel)
+                        # print("qnow", q)
+        # print(q)
+        return q[0]
+
+
             # now we pop on the left, aka at the front 
             nums.popleft()
         # return the 0th item 
