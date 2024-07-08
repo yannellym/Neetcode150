@@ -120,3 +120,28 @@ class Solution(object):
             nums.popleft()
         # return the 0th item 
         return nums[0]
+
+
+
+from collections import deque
+
+class Solution(object):
+    def findTheWinner(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: int
+        """
+        # Create a list of friends from 1 to n
+        circle = list(range(1, n + 1))
+        current_index = 0
+        
+        while len(circle) > 1:
+            # Compute the index of the friend to be removed
+            current_index = (current_index + k - 1) % len(circle)
+            print((current_index + k - 1), len(circle), current_index)
+            # Remove the friend at current_index
+            circle.pop(current_index)
+        
+        # Return the remaining friend who is the winner
+        return circle[0]
