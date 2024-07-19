@@ -64,3 +64,32 @@ class Solution(object):
                 lucky_numbers.append(row_min)
 
         return lucky_numbers
+
+
+
+<--------->
+
+ nrows = len(matrix)
+        ncols = len(matrix[0])
+        
+        # Step 1: Compute row minimums and their column indices
+        row_mins = []
+        row_min_indices = []
+        for row in matrix:
+            min_value = min(row)
+            row_mins.append(min_value)
+            row_min_indices.append(row.index(min_value))
+        
+        # Step 2: Compute column maximums
+        col_maxes = [max(matrix[row][col] for row in range(nrows)) for col in range(ncols)]
+        
+        # Step 3: Check for lucky numbers
+        lucky_nums = []
+        for i in range(nrows):
+            min_value = row_mins[i]
+            min_col_index = row_min_indices[i]
+            if min_value == col_maxes[min_col_index]:
+                lucky_nums.append(min_value)
+        
+        return lucky_nums
+
