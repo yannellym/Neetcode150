@@ -57,4 +57,17 @@ class Solution(object):
             res.append(names[i])
         return res
 
+
+<---->
+
+class Solution(object):
+    def sortPeople(self, names, heights):
+        """
+        :type names: List[str]
+        :type heights: List[int]
+        :rtype: List[str]
+        """
+        combo = zip(names,heights)
+        return [x for x,y in sorted(combo, key= lambda x:-x[1])]
+
         
